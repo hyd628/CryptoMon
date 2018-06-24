@@ -1,17 +1,18 @@
-i<template>
+<template>
   <div class="dashboard">
     <h1>{{ msg }}</h1>
     <div v-if="userExists">
       Welcome {{ pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
     </div>
     <div v-else>Sign up <router-link to="/signup">here</router-link>.</div>
-    <div><input v-model="newmonstername" type="text" placeholder="Enter CryptoMon Name">
-    <button v-on:click="createmon">Create Monster</button></div>
+    <div><i-input v-model="newmonstername" type="text" placeholder="Enter CryptoMon Name"></i-input>
+    <i-button v-on:click="createmon">Create Monster</i-button></div>
 
-    <div><input v-model="monsterid" type="text" placeholder="Enter Monster ID">
-     <button v-on:click="showmon">Show Owned Monster</button></div>
+    <div><i-input v-model="monsterid" type="text" placeholder="Enter Monster ID"></i-input>
+     <i-button v-on:click="showmon">Show Owned Monster</i-button></div>
 
   </div>
+
 </template>
 
 <script>
@@ -46,6 +47,12 @@ export default {
       get: function () {
       return (typeof this.pseudo !== 'undefined')
     }
+   },
+    web3Exists:{
+      cache: false,
+      get: function () {
+      return (typeof window.web3 !== 'undefined')
+    }
    }
   },
   beforeCreate: function () {
@@ -64,6 +71,13 @@ export default {
     }).catch(err => {
       console.log(err)
     })
+    if(!this.web3Exists){
+  	this.$Message.error({
+                    content: 'Please use a Metamask enabled browser.',
+                    duration: 10,
+                    closable: true
+                });
+    }
   },
   methods: {
     destroyAccount: function (e) {
