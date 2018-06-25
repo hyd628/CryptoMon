@@ -11,15 +11,15 @@ contract MonsterFactory is Ownable {
     uint cooldownTime = 1 days;
 
     struct Monster {
-      string name;
-      uint dna;
-      uint32 level;
-      uint32 readyTime;
-      uint16 winCount;
-      uint16 lossCount;
+        string name;
+        uint dna;
+        uint32 level;
+        uint32 readyTime;
+        uint16 winCount;
+        uint16 lossCount;
     }
 
-   Monster[] public monsters;
+    Monster[] public monsters;
 
     mapping (uint => address) public monsterToOwner;
     mapping (address => uint) ownerMonsterCount;
