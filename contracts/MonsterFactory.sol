@@ -25,6 +25,7 @@ contract MonsterFactory is Ownable {
     mapping (address => uint) ownerMonsterCount;
 
     function _createMonster(string _name, uint _dna) internal {
+        /* solium-disable-next-line */
         uint id = monsters.push(Monster(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
         monsterToOwner[id] = msg.sender;
         ownerMonsterCount[msg.sender]++;
@@ -37,7 +38,7 @@ contract MonsterFactory is Ownable {
     }
 
     function createRandomMonster(string _name) public {
-        //require(ownerMonsterCount[msg.sender] == 0);
+        //require(ownerMonsterCount[msg.sender] == 0); For testing.
         uint randDna = _generateRandomDna(_name);
         randDna = randDna - randDna % 100;
         _createMonster(_name, randDna);
