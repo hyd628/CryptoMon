@@ -7,8 +7,9 @@ import locale from 'iview/dist/locale/en-US'
 import App from './App'
 import Web3 from 'web3'
 import router from './router'
+import store from './store/store.js'
 
-Vue.use(iView)
+Vue.use(iView, { locale })
 
 Vue.config.productionTip = false
 
@@ -26,6 +27,7 @@ window.addEventListener('load', function () {
   new Vue({
     el: '#app',
     router,
+    store,
     template: '<App/>',
     components: { App }
   })

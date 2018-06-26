@@ -64,7 +64,7 @@
                         <slot></slot>
                     </Content>
                     <Footer id="footer">
-                        Address Zero Studios &copy; 2018, All Rights Reserved
+                        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
                     </Footer>
                 </Layout>
             </Layout>

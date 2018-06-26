@@ -2,7 +2,7 @@
   <div class="dashboard">
     <div id="dashboardinner" v-if="userExists">
       <layout>
-        Welcome {{ pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
+        Welcome {{ this.$store.state.pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
         <div>
           <i-input v-model="newmonstername" type="text" placeholder="Enter CryptoMon Name"></i-input>
           <i-button v-on:click="createmon">Create Monster</i-button>
@@ -17,6 +17,9 @@
       <img src="../assets/logo.png">
       <h1>{{ msg }}</h1>
       <h2>Sign up <router-link to="/signup">here</router-link></h2>
+      <footer>
+        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+      </footer>
     </div>
   </div>
 </template>
@@ -47,7 +50,6 @@ export default {
   data () {
     return {
       msg: 'Welcome to CryptoMon World!',
-      pseudo: undefined,
       newmonstername: '',
       monsterid: ''
     }
@@ -62,14 +64,14 @@ export default {
     userExists:{
       cache: false,
       get: function () {
-      return (typeof this.pseudo !== 'undefined' && this.pseudo !== userNotFoundHash)
+      return (typeof this.$store.state.pseudo  !== 'undefined' && this.$store.state.pseudo !== userNotFoundHash)
       }
     },
 
     userDoesntExist:{
       cache: false,
       get: function () {
-      return (typeof this.pseudo !== 'undefined' && this.pseudo == userNotFoundHash)
+      return (typeof this.$store.state.pseudo !== 'undefined' && this.$store.state.pseudo == userNotFoundHash)
       }
     },
 
@@ -90,16 +92,16 @@ export default {
 		        console.log(window.web3.fromWei(value, 'ether').toString())
 		      })
           Users.authenticate().then(pseudo => {
-            this.pseudo = pseudo
+            this.$store.commit('register', pseudo)
           })
         }
         else
         {
-          this.pseudo = userNotFoundHash
+          this.$store.commit('register', userNotFoundHash)
         }
       })
     }).catch(err => {
-      this.pseudo = userNotFoundHash
+      this.$store.commit('register', userNotFoundHash)
       console.log(err)
     })
   },
@@ -120,7 +122,7 @@ export default {
     destroyAccount: function (e) {
       e.preventDefault()
       Users.destroy().then(() => {
-        this.pseudo = userNotFoundHash
+        this.$store.commit('register', userNotFoundHash)
       }).catch(err => {
         console.log(err)
       })
@@ -179,5 +181,14 @@ a {
   color: #2c3e50;
   margin-top: 60px;
   margin-bottom: 60px;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
 }
 </style>

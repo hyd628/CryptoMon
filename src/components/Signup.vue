@@ -12,6 +12,9 @@
         <Button type="primary" @click="handleSubmit('formInline')">Sign Up</Button>
       </FormItem>
     </Form>
+    <footer>
+      <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+    </footer>
   </section>
 </template>
 
@@ -77,6 +80,14 @@
                   self.$router.push('/')
                 }, 1000);
               }).catch(err => {
+                this.$Message.error({
+                    render: h => {
+                        return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
+                            'Sign up failed!'
+                        ])
+                    },
+                    duration: 2,
+                })
                 console.log(err)
               })
             }
@@ -150,6 +161,15 @@
     display: block;
     margin-bottom: 10px;
   }
+}
+
+ footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
 }
 
 </style>
