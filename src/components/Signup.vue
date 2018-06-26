@@ -1,20 +1,31 @@
 <template>
   <section id='signup'>
-    <img src="../assets/logo.png">
-    <h1>Sign up for CryptoMon World!</h1>
-    <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-      <FormItem prop="user">
-        <i-input type="text" v-model="formInline.user" placeholder="Alias">
-          <Icon type="ios-person-outline" slot="prepend"></Icon>
-        </i-input>
-      </FormItem>
-      <FormItem>
-        <Button type="primary" @click="handleSubmit('formInline')">Sign Up</Button>
-      </FormItem>
-    </Form>
-    <footer>
-      <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
-    </footer>
+    <div v-if="userDoesntExist">
+      <img src="../assets/logo.png">
+      <h1>Sign up for CryptoMon World!</h1>
+      <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+        <FormItem prop="user">
+          <i-input type="text" v-model="formInline.user" placeholder="Alias">
+            <Icon type="ios-person-outline" slot="prepend"></Icon>
+          </i-input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit('formInline')">Sign Up</Button>
+        </FormItem>
+      </Form>
+      <footer>
+        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+      </footer>
+    </div>
+    <div v-else>
+      <img src="../assets/logo.png">
+      <p>
+        You already have an account associated with this address, please go to the <router-link to='/'>dashboard</router-link>.
+      </p>
+      <footer>
+        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+      </footer>
+    </div>
   </section>
 </template>
 
