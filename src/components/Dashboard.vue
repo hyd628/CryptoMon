@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <div id="dashboardinner" v-if="userExists">
+    <div id="dashboardinner" v-if="showUserFront">
       <layout>
         Welcome {{ this.$store.state.pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
         <div>
@@ -13,13 +13,11 @@
         </div>
       </layout>
     </div>
-    <div id="non-account" v-if="userDoesntExist">
-      <img src="../assets/logo.png">
-      <h1>{{ msg }}</h1>
-      <h2>Sign up <router-link to="/signup">here</router-link></h2>
-      <footer>
-        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
-      </footer>
+    <div v-if="showNoUserFront">
+      <nonuser></nonuser>
+    </div>
+    <div v-if="showSignUp">
+      <signup></signup>
     </div>
   </div>
 </template>
@@ -28,6 +26,8 @@
 import Users from '@/js/users'
 import MonsterFactory from '@/js/monsterfactory'
 import layout from './Layout.vue'
+import signup from './Signup.vue'
+import nonuser from './Nonuser.vue'
 
 const promisify = (inner) =>
      new Promise((resolve, reject) =>
@@ -39,9 +39,6 @@ const promisify = (inner) =>
             }
       })
 );
-
-const userNotFoundHash = '9C1FB859-E440-4E35-A8C7-96E71BDE37FA';
-
 
 export default {
 
@@ -56,31 +53,40 @@ export default {
   },
 
   components: {
-    layout
+    layout,
+    signup,
+    nonuser
   },
 
   computed: {
-
-    userExists:{
-      cache: false,
-      get: function () {
-      return this.$store.getters.userExists
-      }
-    },
-
-    userDoesntExist:{
-      cache: false,
-      get: function () {
-      return this.$store.getters.userDoesntExist
-      }
-    },
 
     web3Exists:{
       cache: false,
       get: function () {
       return (typeof window.web3 !== 'undefined')
       }
-    }
+    },
+
+    showUserFront:{
+      cache: false,
+      get: function () {
+      return this.$store.getters.dashboardState == 'userfront'
+      }
+    },
+
+    showNoUserFront:{
+      cache: false,
+      get: function () {
+      return this.$store.getters.dashboardState == 'nouserfront'
+      }
+    },
+
+    showSignUp:{
+      cache: false,
+      get: function () {
+      return this.$store.getters.dashboardState == 'signup'
+      }
+    },
   },
 
   beforeCreate: function () {
@@ -97,11 +103,11 @@ export default {
         }
         else
         {
-          this.$store.commit('register', userNotFoundHash)
+          this.$store.commit('deregister')
         }
       })
     }).catch(err => {
-      this.$store.commit('register', userNotFoundHash)
+      this.$store.commit('deregister')
       console.log(err)
     })
   },
@@ -122,10 +128,14 @@ export default {
     destroyAccount: function (e) {
       e.preventDefault()
       Users.destroy().then(() => {
-        this.$store.commit('register', userNotFoundHash)
+        this.$store.commit('deregister')
       }).catch(err => {
         console.log(err)
       })
+    },
+    toSignUp: function()
+    {
+      this.$store.commit('signup')
     },
     createmon: function (){
         if(this.newmonstername !== '' && typeof this.newmonstername !== 'undefined'){
@@ -163,17 +173,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
-h1, h2 {
-  font-weight: normal;
-  display: block;
-  margin-bottom: 10px;
-}
-
-a {
-  color: #42b983;
-} 
-
-#non-account{
+.dashboard{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -181,14 +181,10 @@ a {
   color: #2c3e50;
   margin-top: 60px;
   margin-bottom: 60px;
+
 }
 
-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  text-align: center;
-}
+a {
+  color: #42b983;
+} 
 </style>

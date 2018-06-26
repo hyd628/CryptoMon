@@ -7,12 +7,24 @@ const userNotFoundHash = '9C1FB859-E440-4E35-A8C7-96E71BDE37FA'
 
 export default new Vuex.Store({
   state: {
-    pseudo: undefined
+    pseudo: undefined,
+    dashboardview: undefined
   },
 
   mutations: {
-    register (state, _pseudo) {
+    register (state, _pseudo) 
+    {
       state.pseudo = _pseudo
+      state.dashboardview = 'userfront'
+    },
+    deregister (state)
+    {
+      state.pseudo = userNotFoundHash
+      state.dashboardview = 'nouserfront'
+    },
+    signup (state)
+    {
+      state.dashboardview = 'signup'
     }
   },
 
@@ -24,6 +36,10 @@ export default new Vuex.Store({
 
     userDoesntExist: state => {
       return (typeof state.pseudo !== 'undefined' && state.pseudo == userNotFoundHash)
+    },
+
+    dashboardState: state => {
+      return state.dashboardview
     }
   }
 })

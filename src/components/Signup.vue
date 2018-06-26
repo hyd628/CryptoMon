@@ -1,6 +1,6 @@
 <template>
   <section id='signup'>
-    <div v-if="userDoesntExist">
+    <div>
       <img src="../assets/logo.png">
       <h1>Sign up for CryptoMon World!</h1>
       <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
@@ -13,15 +13,6 @@
           <Button type="primary" @click="handleSubmit('formInline')">Sign Up</Button>
         </FormItem>
       </Form>
-      <footer>
-        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
-      </footer>
-    </div>
-    <div v-else>
-      <img src="../assets/logo.png">
-      <p>
-        You already have an account associated with this address, please go to the <router-link to='/'>dashboard</router-link>.
-      </p>
       <footer>
         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
       </footer>
@@ -52,18 +43,6 @@
 
     computed: {
 
-      userExists:{
-        cache: false,
-        get: function () {
-          return this.$store.getters.userExists
-        }
-      },
-      userDoesntExist:{
-        cache: false,
-        get: function () {
-          return this.$store.getters.userDoesntExist
-        }
-      },
       web3Exists:{
         cache: false,
         get: function () {
@@ -74,13 +53,6 @@
 
     beforeCreate: function () {
       Users.init()
-      
-    },
-
-    created: function() {
-      if(!this.web3Exists){
-  	    this.popMetaMaskError()
-      }
     },
 
     methods: {
@@ -101,7 +73,7 @@
                     duration: 2,
                 })
                 this.$store.commit('register', this.formInline.user)
-                self.$router.push('/')
+                //self.$router.push('/')
               }).catch(err => {
                 this.$Message.error({
                     render: h => {
@@ -149,13 +121,6 @@
 <style lang="scss" scoped>
 
 #signup {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  margin-bottom: 60px;
 
   .form {
     display: flex;
@@ -186,7 +151,7 @@
   }
 }
 
- footer {
+footer {
   position: absolute;
   right: 0;
   bottom: 0;

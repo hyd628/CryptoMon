@@ -85,6 +85,7 @@
     position: relative;
     border-radius: 4px;
     overflow: hidden;
+    text-align: left;
 }
 #layoutinner{
     width: 100%; 
