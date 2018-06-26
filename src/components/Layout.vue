@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <Layout>
+        <Layout id="layoutinner">
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo"><img src="../assets/logo.png"></div>
@@ -63,6 +63,9 @@
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                         <slot></slot>
                     </Content>
+                    <Footer id="footer">
+                        Address Zero Studios &copy; 2018, All Rights Reserved
+                    </Footer>
                 </Layout>
             </Layout>
         </Layout>
@@ -83,6 +86,21 @@
     border-radius: 4px;
     overflow: hidden;
 }
+#layoutinner{
+    width: 100%; 
+    height: 100%; 
+    position: fixed;
+}
+
+#footer{
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  max-height: 10px;
+  font-size: 12px;
+}
+
 .layout-logo{
     width: 50px;
     height: 50px;

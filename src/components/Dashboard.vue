@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <div id="dashinner" v-if="userExists">
+    <div id="dashboardinner" v-if="userExists">
       <layout>
         Welcome {{ pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
         <div>
@@ -180,5 +180,4 @@ a {
   margin-top: 60px;
   margin-bottom: 60px;
 }
-
 </style>
