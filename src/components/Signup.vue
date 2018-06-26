@@ -28,15 +28,31 @@
     name: 'signup',
 
     data () {
+      const validateUser = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('User name cannot be empty.'))
+                } 
+                else if (value.length > 20)
+                {
+                    callback(new Error('User name cannot be longer than 20 characters.'))
+                }
+                else if (value === 'Guest')
+                {
+                    callback(new Error('User name reserved.'))
+                }
+                else {
+                    callback();
+                }
+       };
+
       return {
         formInline: {
            user: ''
         },
         ruleInline: {
            user: [
-            { required: true, message: 'User name cannot be empty.', trigger: 'blur' },
-            { type: 'string', max: 20, message: 'User name cannot be longer than 20 characters.', trigger: 'blur' }
-          ]
+              { validator: validateUser, trigger: 'blur' }
+            ]
         }    
       }
     },
@@ -121,6 +137,14 @@
 <style lang="scss" scoped>
 
 #signup {
+
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+  margin-bottom: 60px; 
 
   .form {
     display: flex;

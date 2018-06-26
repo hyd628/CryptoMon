@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const userNotFoundHash = '9C1FB859-E440-4E35-A8C7-96E71BDE37FA'
-
 export default new Vuex.Store({
   state: {
     pseudo: undefined,
@@ -19,7 +17,7 @@ export default new Vuex.Store({
     },
     deregister (state)
     {
-      state.pseudo = userNotFoundHash
+      state.pseudo = undefined
       state.dashboardview = 'nouserfront'
     },
     signup (state)
@@ -29,15 +27,8 @@ export default new Vuex.Store({
   },
 
   actions: {},
+
   getters: {
-    userExists: state => {
-      return (typeof state.pseudo !== 'undefined' && state.pseudo !== userNotFoundHash)
-    },
-
-    userDoesntExist: state => {
-      return (typeof state.pseudo !== 'undefined' && state.pseudo == userNotFoundHash)
-    },
-
     dashboardState: state => {
       return state.dashboardview
     }
