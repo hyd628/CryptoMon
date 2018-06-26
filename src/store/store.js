@@ -23,7 +23,7 @@ export default new Vuex.Store({
     },
 
     userDoesntExist: state => {
-      return (typeof state.pseudo !== 'undefined' && state.pseudo !== userNotFoundHash)
+      return (typeof state.pseudo !== 'undefined' && state.pseudo == userNotFoundHash)
     }
   }
 })

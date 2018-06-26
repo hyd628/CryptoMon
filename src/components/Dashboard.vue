@@ -64,14 +64,14 @@ export default {
     userExists:{
       cache: false,
       get: function () {
-      return (typeof this.$store.state.pseudo  !== 'undefined' && this.$store.state.pseudo !== userNotFoundHash)
+      return this.$store.getters.userExists
       }
     },
 
     userDoesntExist:{
       cache: false,
       get: function () {
-      return (typeof this.$store.state.pseudo !== 'undefined' && this.$store.state.pseudo == userNotFoundHash)
+      return this.$store.getters.userDoesntExist
       }
     },
 

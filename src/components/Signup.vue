@@ -40,6 +40,19 @@
     },
 
     computed: {
+
+      userExists:{
+        cache: false,
+        get: function () {
+          return this.$store.getters.userExists
+        }
+      },
+      userDoesntExist:{
+        cache: false,
+        get: function () {
+          return this.$store.getters.userDoesntExist
+        }
+      },
       web3Exists:{
         cache: false,
         get: function () {
@@ -76,9 +89,8 @@
                     },
                     duration: 2,
                 })
-                setTimeout(function () {
-                  self.$router.push('/')
-                }, 1000);
+                this.$store.commit('register', this.formInline.user)
+                self.$router.push('/')
               }).catch(err => {
                 this.$Message.error({
                     render: h => {
