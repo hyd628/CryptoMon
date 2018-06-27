@@ -1,7 +1,10 @@
 <template>
   <div class="dashboard">
+    <component v-bind:is="dashLayout"></component>
+    <!--
     <div id="dashboardinner" v-if="showUserFront">
       <layout>
+        
         Welcome {{ this.$store.state.pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
         <div>
           <i-input v-model="newmonstername" type="text" placeholder="Enter CryptoMon Name"></i-input>
@@ -10,7 +13,8 @@
         <div>
           <i-input v-model="monsterid" type="text" placeholder="Enter Monster ID"></i-input>
           <i-button v-on:click="showmon">Show Owned Monster</i-button>
-        </div>
+        </div> 
+
       </layout>
     </div>
     <div v-if="showNoUserFront">
@@ -18,7 +22,7 @@
     </div>
     <div v-if="showSignUp">
       <signup></signup>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -65,6 +69,10 @@ export default {
       get: function () {
       return (typeof window.web3 !== 'undefined')
       }
+    },
+
+    dashLayout: function () {
+      return this.$store.getters.dashboardState
     },
 
     showUserFront:{

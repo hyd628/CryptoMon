@@ -2,7 +2,7 @@
     <div class="layout">
         <Layout id="layoutinner">
             <Header>
-                <Menu mode="horizontal" theme="dark" active-name="1">
+                <Menu mode="horizontal" theme="dark" active-name="1" ref="top_menu">
                     <div class="layout-logo"><img src="../assets/logo.png"></div>
                     <div class="layout-nav">
                         <menu-item name="1">
@@ -30,9 +30,9 @@
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="social-octocat"></Icon>
-                                Monsters
+                                Cryptomons
                             </template>
-                            <menu-item name="1-1">Spawn Monster</menu-item>
+                            <menu-item name="1-1">Spawn Cryptomon</menu-item>
                             <menu-item name="1-2">View Collection</menu-item>
                             <menu-item name="1-3">Option 3</menu-item>
                         </Submenu>
@@ -69,7 +69,10 @@
                         <BreadcrumbItem>Layout</BreadcrumbItem>
                     </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                        <slot></slot>
+                        <homepage v-if="showHomeView"></homepage>
+                        <div v-else>Content View state is wrong
+                            <i-button v-on:click="testfunction">Show Owned Monster</i-button>
+                        </div>
                     </Content>
                     <Footer id="footer">
                         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
@@ -79,9 +82,47 @@
         </Layout>
     </div>
 </template>
+
 <script>
+
+    import homepage from './Homepage.vue'
+
     export default {
-        name: 'layout'
+
+        name: 'layout',
+
+        data () {
+            return {
+            pagenumber: 1
+        }
+  },
+
+        components: {
+            homepage
+        },
+
+        created: function() {
+            this.$nextTick(() => {
+            this.$refs.top_menu.updateOpened()
+            this.$refs.top_menu.updateActiveName()
+            }   
+            )
+        },
+
+        computed: {
+            showHomeView: function () {
+                return this.$store.getters.contentState == 'homepage'
+            },
+            activeHorizontalMenu: function()
+            {
+                return 1
+            }
+        }, 
+
+        methods: {
+
+        }
+
     }
 </script>
 

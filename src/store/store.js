@@ -6,19 +6,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     pseudo: undefined,
-    dashboardview: undefined
+    dashboardview: undefined,
+    contentview: 'homepage'
   },
 
   mutations: {
     register (state, _pseudo) 
     {
       state.pseudo = _pseudo
-      state.dashboardview = 'userfront'
+      state.dashboardview = 'layout'
     },
     deregister (state)
     {
       state.pseudo = undefined
-      state.dashboardview = 'nouserfront'
+      state.dashboardview = 'nonuser'
     },
     signup (state)
     {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
   getters: {
     dashboardState: state => {
       return state.dashboardview
+    },
+    contentState: state => {
+      return state.contentview
     }
   }
 })
