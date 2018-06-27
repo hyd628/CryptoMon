@@ -2,7 +2,7 @@
     <div class="layout">
         <Layout id="layoutinner">
             <Header>
-                <Menu mode="horizontal" theme="dark" active-name="1" ref="top_menu">
+                <Menu mode="horizontal" theme="dark" :active-name="pageNumber" ref="top_menu">
                     <div class="layout-logo"><img src="../assets/logo.png"></div>
                     <div class="layout-nav">
                         <menu-item name="1">
@@ -69,10 +69,12 @@
                         <BreadcrumbItem>Layout</BreadcrumbItem>
                     </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+                        <component :is="contentLayout"></component>
+                        <!--
                         <homepage v-if="showHomeView"></homepage>
                         <div v-else>Content View state is wrong
                             <i-button v-on:click="testfunction">Show Owned Monster</i-button>
-                        </div>
+                        </div>-->
                     </Content>
                     <Footer id="footer">
                         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
@@ -93,9 +95,9 @@
 
         data () {
             return {
-            pagenumber: 1
-        }
-  },
+            pageNumber: '1'
+            };
+        },
 
         components: {
             homepage
@@ -110,9 +112,11 @@
         },
 
         computed: {
-            showHomeView: function () {
-                return this.$store.getters.contentState == 'homepage'
+
+            contentLayout: function () {
+                return this.$store.getters.contentState
             },
+
             activeHorizontalMenu: function()
             {
                 return 1

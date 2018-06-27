@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <component v-bind:is="dashLayout"></component>
+    <component :is="dashLayout"></component>
     <!--
     <div id="dashboardinner" v-if="showUserFront">
       <layout>
@@ -33,6 +33,7 @@ import layout from './Layout.vue'
 import signup from './Signup.vue'
 import nonuser from './Nonuser.vue'
 
+/*
 const promisify = (inner) =>
      new Promise((resolve, reject) =>
          inner((err, res) => {
@@ -43,14 +44,13 @@ const promisify = (inner) =>
             }
       })
 );
-
+*/
 export default {
 
   name: 'dashboard',
 
   data () {
     return {
-      msg: 'Welcome to CryptoMon World!',
       newmonstername: '',
       monsterid: ''
     }
@@ -73,38 +73,19 @@ export default {
 
     dashLayout: function () {
       return this.$store.getters.dashboardState
-    },
+    }
 
-    showUserFront:{
-      cache: false,
-      get: function () {
-      return this.$store.getters.dashboardState == 'userfront'
-      }
-    },
-
-    showNoUserFront:{
-      cache: false,
-      get: function () {
-      return this.$store.getters.dashboardState == 'nouserfront'
-      }
-    },
-
-    showSignUp:{
-      cache: false,
-      get: function () {
-      return this.$store.getters.dashboardState == 'signup'
-      }
-    },
   },
 
   beforeCreate: function () {
     Users.init().then(() => {
       Users.exists(window.web3.eth.accounts[0]).then((exists) => {
         if (exists) {
+          /*
           console.log(window.web3.eth.accounts[0])
 	        promisify(cb => window.web3.eth.getBalance(window.web3.eth.accounts[0], cb)).then(function(value){
 		        console.log(window.web3.fromWei(value, 'ether').toString())
-		      })
+		      })*/
           Users.authenticate().then(pseudo => {
             this.$store.commit('register', pseudo)
           })
