@@ -78,8 +78,10 @@
             let self = this
             if(this.web3Exists)
             {
+              this.$Loading.start();
               Users.create(this.formInline.user).then(tx => {
                 console.log(tx)
+                this.$Loading.finish();
                 this.$Message.success({
                     render: h => {
                         return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
@@ -91,6 +93,7 @@
                 this.$store.commit('register', this.formInline.user)
                 //self.$router.push('/')
               }).catch(err => {
+                this.$Loading.error();
                 this.$Message.error({
                     render: h => {
                         return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [

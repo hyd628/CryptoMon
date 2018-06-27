@@ -127,9 +127,12 @@ export default {
   methods: {
     destroyAccount: function (e) {
       e.preventDefault()
+      this.$Loading.start();
       Users.destroy().then(() => {
+        this.$Loading.finish();
         this.$store.commit('deregister')
       }).catch(err => {
+        this.$Loading.error();
         console.log(err)
       })
     },
