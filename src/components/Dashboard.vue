@@ -31,7 +31,7 @@ import Users from '@/js/users'
 import MonsterFactory from '@/js/monsterfactory'
 import layout from './Layout.vue'
 import signup from './Signup.vue'
-import nonuser from './Nonuser.vue'
+import newuser from './Newuser.vue'
 
 /*
 const promisify = (inner) =>
@@ -59,7 +59,7 @@ export default {
   components: {
     layout,
     signup,
-    nonuser
+    newuser
   },
 
   computed: {

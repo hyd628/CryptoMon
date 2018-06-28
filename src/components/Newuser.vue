@@ -1,5 +1,5 @@
 <template>
-  <div id='nonuser'>
+  <div id='newuser'>
       <img src="../assets/logo.png">
       <h1>{{ msg }}</h1>
       <h2>Sign up <a href="#" @click="toSignUp">here</a></h2>
@@ -13,7 +13,7 @@
 <script>
   export default {
 
-    name: 'nonuser',
+    name: 'newuser',
 
     data () {
       return {
@@ -34,7 +34,7 @@
 
 <style lang="scss" scoped>
 
-#nonuser{
+#newuser{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
