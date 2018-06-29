@@ -22,13 +22,8 @@
     },
 
     methods: {
-      toSignUp: function(){
-        this.$store.commit('signup')
-      },
       guestSignIn: function(){
-        console.log('guest onclick')
         this.$store.commit('register', 'Guest')
-        //this.$router.push({ name: 'dashboard'})
       }
     }
   }

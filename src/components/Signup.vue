@@ -1,6 +1,9 @@
 <template>
   <section id='signup'>
-    <div>
+    <div v-if="pseudoDefined">
+      You already have an account, redirecting to the dashboard.
+    </div>
+    <div v-else>
       <img src="../assets/logo.png">
       <h1>Sign up for CryptoMon World!</h1>
       <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
@@ -64,7 +67,16 @@
         get: function () {
           return (typeof window.web3 !== 'undefined')
         }
+      },
+
+      pseudoDefined: {
+        cache: false,
+        get: function () {
+          console.log(this.$store.state.pseudo)
+          return (typeof this.$store.state.pseudo !== 'undefined')
+        }
       }
+
     },
 
     beforeCreate: function () {
@@ -91,7 +103,7 @@
                     duration: 2,
                 })
                 this.$store.commit('register', this.formInline.user)
-                this.$router.push({ name: 'dashboard'})
+                this.$router.push({ name: 'homepage'})
               }).catch(err => {
                 this.$Loading.error();
                 this.$Message.error({

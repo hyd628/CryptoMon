@@ -69,12 +69,7 @@
                         <BreadcrumbItem>Layout</BreadcrumbItem>
                     </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                        <component :is="contentLayout"></component>
-                        <!--
-                        <homepage v-if="showHomeView"></homepage>
-                        <div v-else>Content View state is wrong
-                            <i-button v-on:click="testfunction">Show Owned Monster</i-button>
-                        </div>-->
+                        <router-view></router-view>                        
                     </Content>
                     <Footer id="footer">
                         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
@@ -87,7 +82,7 @@
 
 <script>
 
-    import homepage from './Homepage.vue'
+    import Homepage from './Homepage.vue'
 
     export default {
 
@@ -100,21 +95,16 @@
         },
 
         components: {
-            homepage
+            Homepage
         },
 
         created: function() {
-            this.$nextTick(() => {
-            this.$refs.top_menu.updateOpened()
-            this.$refs.top_menu.updateActiveName()
-            }   
-            )
         },
 
         computed: {
 
-            contentLayout: function () {
-                return this.$store.getters.contentState
+            pseudo: function () {
+                return this.$store.state.pseudo
             },
 
             activeHorizontalMenu: function()

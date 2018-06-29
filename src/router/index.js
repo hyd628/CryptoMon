@@ -4,6 +4,7 @@ import Dashboard from '@/components/Dashboard'
 import Signup from '@/components/Signup'
 import Welcome from '@/components/Welcome'
 import Layout from '@/components/Layout'
+import Homepage from '@/components/Homepage'
 
 Vue.use(Router)
 
@@ -31,9 +32,21 @@ export default new Router({
         {
           path: '/dashboard',
           name: 'dashboard',
-          component: Layout
+          component: Layout,
+          children: [
+            {
+              // UserProfile will be rendered inside User's <router-view>
+              // when /user/:id/profile is matched
+              path: '/dashboard/homepage',
+              name: 'homepage',
+              component: Homepage
+            }
+          ]
         }
       ]
+    },
+    {
+      path: '/dashboard', redirect: '/dashboard/homepage' 
     }
   ]
 })
