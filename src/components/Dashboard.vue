@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard">
-    <component :is="dashLayout"></component>
-    <!--
+    <router-view></router-view>
+    <!--<component :is="dashLayout"></component>
+    
     <div id="dashboardinner" v-if="showUserFront">
       <layout>
         
@@ -29,9 +30,9 @@
 <script>
 import Users from '@/js/users'
 import MonsterFactory from '@/js/monsterfactory'
-import layout from './Layout.vue'
-import signup from './Signup.vue'
-import newuser from './Newuser.vue'
+import Layout from './Layout.vue'
+import Signup from './Signup.vue'
+import Welcome from './Welcome.vue'
 
 /*
 const promisify = (inner) =>
@@ -57,9 +58,9 @@ export default {
   },
 
   components: {
-    layout,
-    signup,
-    newuser
+    Layout,
+    Signup,
+    Welcome
   },
 
   computed: {
@@ -88,15 +89,18 @@ export default {
 		      })*/
           Users.authenticate().then(pseudo => {
             this.$store.commit('register', pseudo)
+            this.$router.push({ name: 'dashboard'})
           })
         }
         else
         {
           this.$store.commit('deregister')
+          this.$router.push({ name: 'welcome'})
         }
       })
     }).catch(err => {
       this.$store.commit('deregister')
+      this.$router.push({ name: 'welcome'})
       console.log(err)
     })
   },

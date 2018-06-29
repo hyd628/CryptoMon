@@ -19,7 +19,7 @@ export default new Vuex.Store({
     deregister (state)
     {
       state.pseudo = undefined
-      state.dashboardview = 'newuser'
+      state.dashboardview = 'welcome'
     },
     signup (state)
     {

@@ -1,8 +1,8 @@
 <template>
-  <div id='newuser'>
+  <div id='welcome'>
       <img src="../assets/logo.png">
       <h1>{{ msg }}</h1>
-      <h2>Sign up <a href="#" @click="toSignUp">here</a></h2>
+      <h2>Sign up <router-link to="/signup">here</router-link></h2>
       <h2>Browse as a <a href="#" @click="guestSignIn">guest</a></h2>
       <footer>
         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
@@ -13,7 +13,7 @@
 <script>
   export default {
 
-    name: 'newuser',
+    name: 'welcome',
 
     data () {
       return {
@@ -27,6 +27,7 @@
       },
       guestSignIn: function(){
         this.$store.commit('register', 'Guest')
+        this.$router.push({ name: 'dashboard'})
       }
     }
   }
@@ -34,7 +35,7 @@
 
 <style lang="scss" scoped>
 
-#newuser{
+#welcome{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

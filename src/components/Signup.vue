@@ -91,7 +91,7 @@
                     duration: 2,
                 })
                 this.$store.commit('register', this.formInline.user)
-                //self.$router.push('/')
+                this.$router.push({ name: 'dashboard'})
               }).catch(err => {
                 this.$Loading.error();
                 this.$Message.error({
