@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     pseudo: undefined,
+    layoutview: 'homepage'
   },
 
   mutations: {
@@ -18,6 +19,11 @@ export default new Vuex.Store({
     deregister (state)
     {
       state.pseudo = undefined
+    },
+
+    updateview (state, _view)
+    {
+      state.layoutview = _view
     }
   },
 

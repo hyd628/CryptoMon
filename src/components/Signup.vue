@@ -1,7 +1,7 @@
 <template>
   <section id='signup'>
     <div v-if="pseudoDefined">
-      You already have an account, redirecting to the dashboard.
+      You already have an account, redirecting to the dashboard...
     </div>
     <div v-else>
       <img src="../assets/logo.png">
@@ -72,7 +72,6 @@
       pseudoDefined: {
         cache: false,
         get: function () {
-          console.log(this.$store.state.pseudo)
           return (typeof this.$store.state.pseudo !== 'undefined')
         }
       }
@@ -81,6 +80,16 @@
 
     beforeCreate: function () {
       Users.init()
+    },
+
+    mounted: function()
+    {
+      if (this.pseudoDefined){
+        var self = this;
+        setTimeout(function () {
+          self.$router.push('/homepage')
+        }, 2500);
+      }
     },
 
     methods: {

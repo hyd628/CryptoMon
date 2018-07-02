@@ -5,10 +5,12 @@ import Signup from '@/components/Signup'
 import Welcome from '@/components/Welcome'
 import Layout from '@/components/Layout'
 import Homepage from '@/components/Homepage'
+import News from '@/components/News'
+import store from '../store/store.js'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -16,15 +18,11 @@ export default new Router({
       component: Dashboard,
       children: [
         {
-          // UserProfile will be rendered inside User's <router-view>
-          // when /user/:id/profile is matched
           path: '/welcome',
           name: 'welcome',
           component: Welcome
         },
         {
-          // UserPosts will be rendered inside User's <router-view>
-          // when /user/:id/posts is matched
           path: '/signup',
           name: 'signup',
           component: Signup
@@ -35,18 +33,24 @@ export default new Router({
           component: Layout,
           children: [
             {
-              // UserProfile will be rendered inside User's <router-view>
-              // when /user/:id/profile is matched
-              path: '/dashboard/homepage',
+              path: '/homepage',
               name: 'homepage',
               component: Homepage
+            },
+            {
+              path: '/news',
+              name: 'news',
+              component: News
             }
           ]
         }
       ]
-    },
-    {
-      path: '/dashboard', redirect: '/dashboard/homepage' 
     }
   ]
 })
+
+router.afterEach((to, from) => {
+  store.commit('updateview', to.name)
+})
+
+export default router

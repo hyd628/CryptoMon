@@ -1,9 +1,8 @@
 <template>
   <div>
-      <h1>HomePage Filler Content</h1>
+      <h1>News Filler Content</h1>
           Welcome {{ this.$store.state.pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
-          <router-link to="/news">News</router-link>
-
+            <router-link to="/homepage">HomePage</router-link>
   </div>
  </template>
 
@@ -11,7 +10,7 @@
   import Users from '@/js/users'
   export default {
 
-    name: 'homepage',
+    name: 'news',
 
     data () {
       return {

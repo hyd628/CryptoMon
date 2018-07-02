@@ -37,7 +37,13 @@ export default {
         if (exists) {
           Users.authenticate().then(pseudo => {
             this.$store.commit('register', pseudo)
-            this.$router.push({ name: 'homepage'})
+            if(this.$router.currentRoute.path === '/'){
+              this.$router.push({ name: 'homepage'})
+
+            }
+            else {
+              this.$router.push(this.$router.currentRoute.path)
+            }
           })
         }
         else

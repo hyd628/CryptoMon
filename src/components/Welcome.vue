@@ -1,14 +1,19 @@
 <template>
-  <div id='welcome'>
+  <section id='welcome'>
+    <div v-if="pseudoDefined">
+      You already have an account, redirecting to the dashboard...
+    </div>
+    <div v-else>
       <img src="../assets/logo.png">
       <h1>{{ msg }}</h1>
       <h2>Sign up <router-link to="/signup">here</router-link></h2>
-      <h2>Browse as a <router-link to="/dashboard" v-on:click.native="guestSignIn" >guest</router-link></h2>
+      <h2>Browse as a <router-link to="/homepage" v-on:click.native="guestSignIn" >guest</router-link></h2>
       <footer>
         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
       </footer>
-  </div>
- </template>
+    </div>
+  </section>
+</template>
 
 <script>
   export default {
@@ -18,6 +23,27 @@
     data () {
       return {
         msg: 'Welcome to CryptoMon World!'
+      }
+    },
+
+    computed: {
+
+      pseudoDefined: {
+        cache: false,
+        get: function () {
+          return (typeof this.$store.state.pseudo !== 'undefined')
+        }
+      }
+
+    },
+
+    mounted: function()
+    {
+      if (this.pseudoDefined){
+        var self = this;
+        setTimeout(function () {
+          self.$router.push('/homepage')
+        }, 2500);
       }
     },
 

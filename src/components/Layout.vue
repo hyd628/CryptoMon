@@ -1,23 +1,28 @@
 <template>
-    <div class="layout">
+    <section id='layout'>
+    <div class="layout" v-if="pseudoDefined">
         <Layout id="layoutinner">
             <Header>
-                <Menu mode="horizontal" theme="dark" :active-name="pageNumber" ref="top_menu">
-                    <div class="layout-logo"><img src="../assets/logo.png"></div>
+                <Menu mode="horizontal" theme="dark" :active-name="layoutview">
+                    <div class="layout-logo"><router-link to="/homepage"><img src="../assets/logo.png"></router-link></div>
                     <div class="layout-nav">
-                        <menu-item name="1">
-                            <Icon type="ios-home-outline"></Icon>
-                            Home
-                        </menu-item>
-                        <menu-item name="2">
-                            <Icon type="ios-list-outline"></Icon>
-                            News
-                        </menu-item>
-                        <menu-item name="3">
+                        <router-link to="/homepage">
+                            <menu-item name="homepage">
+                                <Icon type="ios-home-outline"></Icon>
+                                Home
+                            </menu-item>
+                        </router-link>
+                        <router-link to="/news">
+                            <menu-item name="news">
+                                <Icon type="ios-list-outline"></Icon>
+                                News
+                            </menu-item>
+                        </router-link>
+                        <menu-item name="notifications">
                             <Icon type="ios-information-outline"></Icon>
                             Notifications
                         </menu-item>
-                        <menu-item name="4">
+                        <menu-item name="account">
                             <Icon type="ios-person-outline"></Icon>
                             Account
                         </menu-item>
@@ -78,6 +83,7 @@
             </Layout>
         </Layout>
     </div>
+    </section>
 </template>
 
 <script>
@@ -90,15 +96,11 @@
 
         data () {
             return {
-            pageNumber: '1'
             };
         },
 
         components: {
             Homepage
-        },
-
-        created: function() {
         },
 
         computed: {
@@ -107,10 +109,16 @@
                 return this.$store.state.pseudo
             },
 
-            activeHorizontalMenu: function()
-            {
-                return 1
-            }
+            layoutview: function () {
+                return this.$store.state.layoutview
+            },
+
+            pseudoDefined: {
+                cache: false,
+                get: function () {
+                    return (typeof this.$store.state.pseudo !== 'undefined')
+                }
+            },
         }, 
 
         methods: {
@@ -168,4 +176,9 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
+
+a {
+  color: #42b983;
+} 
+
 </style>
