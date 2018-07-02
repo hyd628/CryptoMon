@@ -53,4 +53,31 @@ router.afterEach((to, from) => {
   store.commit('updateview', to.name)
 })
 
+
+router.beforeEach((to, from, next) => {
+
+  if (typeof store.state.pseudo === 'undefined')
+  {
+    if (to.name === 'root' || to.name === 'welcome' || to.name === 'signup') 
+    {
+      next()
+    }
+    else 
+    {
+      next({name: 'root'})
+    }
+  }  
+  else
+  {
+    if (to.name === 'root' || to.name === 'welcome' || to.name === 'signup') 
+    {
+      next({name: 'homepage'})
+    }
+    else 
+    {
+      next()
+    }
+  }
+})
+
 export default router

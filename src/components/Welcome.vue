@@ -1,9 +1,6 @@
 <template>
   <section id='welcome'>
-    <div v-if="pseudoDefined">
-      You already have an account, redirecting to the dashboard...
-    </div>
-    <div v-else>
+    <div>
       <img src="../assets/logo.png">
       <h1>{{ msg }}</h1>
       <h2>Sign up <router-link to="/signup">here</router-link></h2>
@@ -28,28 +25,12 @@
 
     computed: {
 
-      pseudoDefined: {
-        cache: false,
-        get: function () {
-          return (typeof this.$store.state.pseudo !== 'undefined')
-        }
-      }
-
-    },
-
-    mounted: function()
-    {
-      if (this.pseudoDefined){
-        var self = this;
-        setTimeout(function () {
-          self.$router.push('/homepage')
-        }, 2500);
-      }
     },
 
     methods: {
       guestSignIn: function(){
         this.$store.commit('register', 'Guest')
+        this.$router.push({name: 'homepage'})
       }
     }
   }
