@@ -4,7 +4,7 @@
       <img src="../assets/logo.png">
       <h1>{{ msg }}</h1>
       <h2>Sign up <router-link to="/signup">here</router-link></h2>
-      <h2>Browse as a <router-link to="/homepage" v-on:click.native="guestSignIn" >guest</router-link></h2>
+      <h2>Browse as a <router-link to="/home" v-on:click.native="guestSignIn" >guest</router-link></h2>
       <footer>
         <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
       </footer>
@@ -30,7 +30,7 @@
     methods: {
       guestSignIn: function(){
         this.$store.commit('register', 'Guest')
-        this.$router.push({name: 'homepage'})
+        this.$router.push({name: 'Home'})
       }
     }
   }

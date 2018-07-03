@@ -38,7 +38,7 @@ export default {
           Users.authenticate().then(pseudo => {
             this.$store.commit('register', pseudo)
             if(this.$router.currentRoute.path === '/'){
-              this.$router.push({ name: 'homepage'})
+              this.$router.push({ name: 'Home'})
 
             }
             else {
@@ -49,12 +49,12 @@ export default {
         else
         {
           this.$store.commit('deregister')
-          this.$router.push({ name: 'welcome'})
+          this.$router.push({ name: 'Welcome'})
         }
       })
     }).catch(err => {
       this.$store.commit('deregister')
-      this.$router.push({ name: 'welcome'})
+      this.$router.push({ name: 'Welcome'})
       console.log(err)
     })
   },

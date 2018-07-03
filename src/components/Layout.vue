@@ -4,25 +4,25 @@
         <Layout id="layoutinner">
             <Header>
                 <Menu mode="horizontal" theme="dark" :active-name="layoutview">
-                    <div class="layout-logo"><router-link to="/homepage"><img src="../assets/logo.png"></router-link></div>
+                    <div class="layout-logo"><router-link to="/home"><img src="../assets/logo.png"></router-link></div>
                     <div class="layout-nav">
-                        <router-link to="/homepage">
-                            <menu-item name="homepage">
+                        <router-link to="/home">
+                            <menu-item name="Home">
                                 <Icon type="ios-home-outline"></Icon>
                                 Home
                             </menu-item>
                         </router-link>
                         <router-link to="/news">
-                            <menu-item name="news">
+                            <menu-item name="News">
                                 <Icon type="ios-list-outline"></Icon>
                                 News
                             </menu-item>
                         </router-link>
-                        <menu-item name="notifications">
+                        <menu-item name="Notifications">
                             <Icon type="ios-information-outline"></Icon>
                             Notifications
                         </menu-item>
-                        <menu-item name="account">
+                        <menu-item name="Account">
                             <Icon type="ios-person-outline"></Icon>
                             Account
                         </menu-item>
@@ -69,9 +69,8 @@
                 </Sider>
                 <Layout :style="{padding: '0 24px 0px'}">
                     <Breadcrumb :style="{margin: '8px 0'}">
-                        <BreadcrumbItem>Home</BreadcrumbItem>
-                        <BreadcrumbItem>Components</BreadcrumbItem>
-                        <BreadcrumbItem>Layout</BreadcrumbItem>
+                        <BreadcrumbItem to="Home">Dashboard</BreadcrumbItem>
+                        <BreadcrumbItem :to="layoutview">{{layoutview}}</BreadcrumbItem>
                     </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                         <router-view></router-view>                        
@@ -128,7 +127,8 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 .layout{
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     border: 1px solid #d7dde4;
@@ -137,11 +137,13 @@
     border-radius: 4px;
     overflow: hidden;
     text-align: left;
+        
 }
 #layoutinner{
     width: 100%; 
     height: 100%; 
     position: fixed;
+    
 }
 
 #footer{
@@ -176,9 +178,5 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
-
-a {
-  color: #42b983;
-} 
 
 </style>

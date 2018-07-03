@@ -14,32 +14,32 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'root',
+      name: 'Root',
       component: Dashboard,
       children: [
         {
           path: '/welcome',
-          name: 'welcome',
+          name: 'Welcome',
           component: Welcome
         },
         {
           path: '/signup',
-          name: 'signup',
+          name: 'Signup',
           component: Signup
         },
         {
           path: '/dashboard',
-          name: 'dashboard',
+          name: 'Dashboard',
           component: Layout,
           children: [
             {
-              path: '/homepage',
-              name: 'homepage',
+              path: '/home',
+              name: 'Home',
               component: Homepage
             },
             {
               path: '/news',
-              name: 'news',
+              name: 'News',
               component: News
             }
           ]
@@ -58,20 +58,20 @@ router.beforeEach((to, from, next) => {
 
   if (typeof store.state.pseudo === 'undefined')
   {
-    if (to.name === 'root' || to.name === 'welcome' || to.name === 'signup') 
+    if (to.name === 'Root' || to.name === 'Welcome' || to.name === 'Signup') 
     {
       next()
     }
     else 
     {
-      next({name: 'root'})
+      next({name: 'Root'})
     }
   }  
   else
   {
-    if (to.name === 'root' || to.name === 'welcome' || to.name === 'signup') 
+    if (to.name === 'Root' || to.name === 'Welcome' || to.name === 'Signup') 
     {
-      next({name: 'homepage'})
+      next({name: 'Home'})
     }
     else 
     {

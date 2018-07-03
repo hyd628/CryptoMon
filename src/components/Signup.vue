@@ -92,7 +92,7 @@
                     duration: 2,
                 })
                 this.$store.commit('register', this.formInline.user)
-                this.$router.push({ name: 'homepage'})
+                this.$router.push({ name: 'Home'})
               }).catch(err => {
                 this.$Loading.error();
                 this.$Message.error({
@@ -154,6 +154,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
+  
       
     .entry {
       display: flex;

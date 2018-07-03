@@ -1,8 +1,8 @@
 <template>
   <div>
-      <h1>News Filler Content</h1>
+      <h1>Welcome {{ this.$store.state.pseudo }}.</h1>
           Welcome {{ this.$store.state.pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
-            <router-link to="/homepage">HomePage</router-link>
+            <router-link to="/home">Home</router-link>
   </div>
  </template>
 
@@ -25,7 +25,7 @@
       Users.destroy().then(() => {
         this.$Loading.finish()
         this.$store.commit('deregister')
-        this.$router.push({ name: 'welcome'})
+        this.$router.push({ name: 'Welcome'})
       }).catch(err => {
         this.$Loading.error();
         console.log(err)
