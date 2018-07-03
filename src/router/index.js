@@ -4,9 +4,13 @@ import Dashboard from '@/components/Dashboard'
 import Signup from '@/components/Signup'
 import Welcome from '@/components/Welcome'
 import Layout from '@/components/Layout'
-import Homepage from '@/components/Homepage'
+import Home from '@/components/Home'
 import News from '@/components/News'
+import Account from '@/components/Account'
+import Spawn from '@/components/Spawn'
+import Collection from '@/components/Collection'
 import store from '../store/store.js'
+
 
 Vue.use(Router)
 
@@ -35,13 +39,28 @@ const router = new Router({
             {
               path: '/home',
               name: 'Home',
-              component: Homepage
+              component: Home
             },
             {
               path: '/news',
               name: 'News',
               component: News
-            }
+            },
+            {
+              path: '/account',
+              name: 'Account',
+              component: Account
+            },
+            {
+              path: '/spawn',
+              name: 'Spawn',
+              component: Spawn
+            },
+            {
+              path: '/collection',
+              name: 'Collection',
+              component: Collection
+            },
           ]
         }
       ]

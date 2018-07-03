@@ -1,6 +1,6 @@
 <template>
     <section id='layout'>
-    <div class="layout" v-if="pseudoDefined">
+    <div class="layout">
         <Layout id="layoutinner">
             <Header>
                 <Menu mode="horizontal" theme="dark" :active-name="layoutview">
@@ -22,23 +22,25 @@
                             <Icon type="ios-information-outline"></Icon>
                             Notifications
                         </menu-item>
-                        <menu-item name="Account">
-                            <Icon type="ios-person-outline"></Icon>
-                            Account
-                        </menu-item>
+                        <router-link to="/account">
+                            <menu-item name="Account">
+                                <Icon type="ios-person-outline"></Icon>
+                                Account
+                            </menu-item>
+                        </router-link>
                     </div>
                 </Menu>
             </Header>
             <Layout>
                 <Sider width='200' :style="{background: '#495060'}">
-                    <Menu theme="dark" width="auto">
+                    <Menu theme="dark" width="auto" :active-name="layoutview" :open-names="['1']">
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="social-octocat"></Icon>
                                 Cryptomons
                             </template>
-                            <menu-item name="1-1">Spawn Cryptomon</menu-item>
-                            <menu-item name="1-2">View Collection</menu-item>
+                            <router-link to="/spawn"><menu-item name="Spawn">Spawn Cryptomon</menu-item></router-link>
+                            <router-link to="/collection"><menu-item name="Collection">View Collection</menu-item></router-link>
                             <menu-item name="1-3">Option 3</menu-item>
                         </Submenu>
                         <Submenu name="2">
@@ -67,7 +69,7 @@
                         </Submenu>
                     </Menu>
                 </Sider>
-                <Layout :style="{padding: '0 24px 0px'}">
+                <Layout :style="{padding: '0 24px 0px'}" class="layout">
                     <Breadcrumb :style="{margin: '8px 0'}">
                         <BreadcrumbItem to="Home">Dashboard</BreadcrumbItem>
                         <BreadcrumbItem :to="layoutview">{{layoutview}}</BreadcrumbItem>
@@ -76,7 +78,7 @@
                         <router-view></router-view>                        
                     </Content>
                     <Footer id="footer">
-                        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+                        <span>Address Zero Studios &copy; 2018, All Rights Reserved.</span>
                     </Footer>
                 </Layout>
             </Layout>
@@ -87,7 +89,8 @@
 
 <script>
 
-    import Homepage from './Homepage.vue'
+    import Home from './Home.vue'
+    import News from './News.vue'
 
     export default {
 
@@ -99,25 +102,17 @@
         },
 
         components: {
-            Homepage
+            Home,
+            News
+
         },
 
         computed: {
 
-            pseudo: function () {
-                return this.$store.state.pseudo
-            },
-
             layoutview: function () {
                 return this.$store.state.layoutview
-            },
+            }
 
-            pseudoDefined: {
-                cache: false,
-                get: function () {
-                    return (typeof this.$store.state.pseudo !== 'undefined')
-                }
-            },
         }, 
 
         methods: {
@@ -129,8 +124,10 @@
 
 <style lang="scss" scoped>
 
+@import url('https://fonts.googleapis.com/css?family=Monda:400,700');
+
 .layout{
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Monda', sans-serif;
     border: 1px solid #d7dde4;
     background: #f5f7f9;
     position: relative;
@@ -147,7 +144,7 @@
 }
 
 #footer{
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Monda', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

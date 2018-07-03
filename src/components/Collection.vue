@@ -1,8 +1,7 @@
 <template>
   <div>
-      <h1>Welcome, {{ this.$store.state.pseudo }}.</h1>
-           Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
-          <router-link to="/news">News</router-link>
+    <h1>Manage Cryptomon Collection</h1>
+    Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
 
   </div>
  </template>
@@ -11,11 +10,10 @@
   import Users from '@/js/users'
   export default {
 
-    name: 'homepage',
+    name: 'collection',
 
     data () {
       return {
-        msg: 'Welcome to CryptoMon World!'
       }
     },
 
@@ -37,5 +35,9 @@
 </script>
 
 <style lang="scss" scoped>
+
+a {
+  color: #42b983;
+} 
 
 </style>

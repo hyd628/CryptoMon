@@ -14,7 +14,7 @@
         </FormItem>
       </Form>
       <footer>
-        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+        <span>Address Zero Studios &copy; 2018, All Rights Reserved.</span>
       </footer>
     </div>
   </section>
@@ -85,7 +85,7 @@
                 this.$Loading.finish();
                 this.$Message.success({
                     render: h => {
-                        return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
+                        return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
                             'Sign up successful!'
                         ])
                     },
@@ -97,7 +97,7 @@
                 this.$Loading.error();
                 this.$Message.error({
                     render: h => {
-                        return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
+                        return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
                             'Sign up failed!'
                         ])
                     },
@@ -113,7 +113,7 @@
           } else {
             this.$Message.error({
                     render: h => {
-                        return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
+                        return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
                             'Sign up failed!'
                         ])
                     },
@@ -126,7 +126,7 @@
       {
         this.$Message.error({
           render: h => {
-                        return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
+                        return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
                             'Please use a Metamask enabled browser.'
                         ])
                     },
@@ -140,9 +140,11 @@
 
 <style lang="scss" scoped>
 
+@import url('https://fonts.googleapis.com/css?family=Monda:400,700');
+
 #signup {
 
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Monda', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -154,6 +156,11 @@
     display: flex;
     flex-direction: column;
     margin: auto;
+
+    input[type="text"]
+    {
+      font-family: 'Monda', sans-serif;
+    }
   
       
     .entry {

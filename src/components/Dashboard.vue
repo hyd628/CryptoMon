@@ -63,7 +63,7 @@ export default {
       if(!this.web3Exists){
         this.$Message.error({
           render: h => {
-            return h('span', {style: {fontFamily: 'Avenir', fontSize: '14px'}}, [
+            return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
               'Please use a Metamask enabled browser.'])},
           duration: 5,
           closable: true

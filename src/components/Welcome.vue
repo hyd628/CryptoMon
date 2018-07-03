@@ -6,7 +6,7 @@
       <h2>Sign up <router-link to="/signup">here</router-link></h2>
       <h2>Browse as a <router-link to="/home" v-on:click.native="guestSignIn" >guest</router-link></h2>
       <footer>
-        <span>Address Zero Studios &copy; 2018, All Rights Reserved</span>
+        <span>Address Zero Studios &copy; 2018, All Rights Reserved.</span>
       </footer>
     </div>
   </section>
@@ -38,8 +38,10 @@
 
 <style lang="scss" scoped>
 
+@import url('https://fonts.googleapis.com/css?family=Monda:400,700');
+
 #welcome{
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Monda', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
