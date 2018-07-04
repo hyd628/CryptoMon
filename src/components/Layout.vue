@@ -33,8 +33,8 @@
             </Header>
             <Layout>
                 <Sider width='200' :style="{background: '#495060'}">
-                    <Menu theme="dark" width="auto" :active-name="layoutview" :open-names="['1']">
-                        <Submenu name="1">
+                    <Menu theme="dark" width="auto" :active-name="layoutview" :open-names="sidebarmenu" accordion ref="side_menu">
+                        <Submenu name="CryptomonMenu">
                             <template slot="title">
                                 <Icon type="social-octocat"></Icon>
                                 Cryptomons
@@ -43,7 +43,7 @@
                             <router-link to="/collection"><menu-item name="Collection">View Collection</menu-item></router-link>
                             <menu-item name="1-3">Option 3</menu-item>
                         </Submenu>
-                        <Submenu name="2">
+                        <Submenu name="ArenaMenu">
                             <template slot="title">
                                 <Icon type="ios-paw"></Icon>
                                 Battle Arena
@@ -51,7 +51,7 @@
                             <menu-item name="2-1">Option 1</menu-item>
                             <menu-item name="2-2">Option 2</menu-item>
                         </Submenu>
-                        <Submenu name="3">
+                        <Submenu name="FortressMenu">
                             <template slot="title">
                                 <Icon type="cube"></Icon>
                                 Fortress
@@ -59,7 +59,7 @@
                             <menu-item name="3-1">Option 1</menu-item>
                             <menu-item name="3-2">Option 2</menu-item>
                         </Submenu>
-                        <Submenu name="4">
+                        <Submenu name="AuctionHouseMenu">
                             <template slot="title">
                                 <Icon type="bag"></Icon>
                                 Auction House
@@ -89,33 +89,30 @@
 
 <script>
 
-    import Home from './Home.vue'
-    import News from './News.vue'
-
     export default {
 
         name: 'layout',
 
-        data () {
-            return {
-            };
-        },
-
-        components: {
-            Home,
-            News
-
+        beforeUpdate: function()
+        {
+            this.$nextTick(() => {
+                    this.$refs.side_menu.updateOpened()
+                })
         },
 
         computed: {
 
             layoutview: function () {
                 return this.$store.state.layoutview
+            },
+
+            sidebarmenu: function () {
+                if (this.$store.state.layoutview === 'Spawn' || this.$store.state.layoutview === 'Collection') {
+                    return ['CryptomonMenu']
+                } else {
+                    return []
+                }
             }
-
-        }, 
-
-        methods: {
 
         }
 

@@ -3,6 +3,7 @@
       <h1>Welcome, {{ this.$store.state.pseudo }}.</h1>
            Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
           <router-link to="/news">News</router-link>
+          <router-link to="/spawn">Spawn Cryptomon</router-link>
 
   </div>
  </template>
