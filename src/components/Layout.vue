@@ -18,10 +18,12 @@
                                 News
                             </menu-item>
                         </router-link>
-                        <menu-item name="Notifications">
-                            <Icon type="ios-information-outline"></Icon>
-                            Notifications
-                        </menu-item>
+                        <router-link to="/notification">
+                            <menu-item name="Notification">
+                                <Icon type="ios-information-outline"></Icon>
+                                Notifications
+                            </menu-item>
+                        </router-link>
                         <router-link to="/account">
                             <menu-item name="Account">
                                 <Icon type="ios-person-outline"></Icon>

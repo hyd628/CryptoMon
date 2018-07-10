@@ -22,7 +22,7 @@ contract MonsterFactory is Ownable {
     Monster[] public monsters;
 
     mapping (uint => address) public monsterToOwner;
-    mapping (address => uint) ownerMonsterCount;
+    mapping (address => uint) public ownerMonsterCount;
 
     function _createMonster(string _name, uint _dna) internal {
         /* solium-disable-next-line */

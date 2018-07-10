@@ -38,7 +38,13 @@ const MonsterFactory = {
   Monsters: function (id) {
     let self = this
     return self.instance.monsters.call(id,{from: window.web3.eth.accounts[0]})
+  },
+
+  monsterToOwner: function(id) {
+    let self = this
+    return self.instance.monsters.call(id,{from: window.web3.eth.accounts[0]})
   }
+  
 }
 
 export default MonsterFactory

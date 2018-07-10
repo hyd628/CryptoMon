@@ -6,7 +6,6 @@
 
 <script>
 import Users from '@/js/users'
-import MonsterFactory from '@/js/monsterfactory'
 import Layout from './Layout.vue'
 import Signup from './Signup.vue'
 import Welcome from './Welcome.vue'
