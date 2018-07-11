@@ -1,11 +1,11 @@
 <template>
   <div>
       <h1>Notifications</h1>
-      <ul id="example-1">
+      <ul>
         <li v-for="(item, index) in notificationData" :key="index">
             <Icon type="android-notifications-none"></Icon> {{ item.args.name }} created.
         </li>
-    </ul>
+      </ul>
   </div>
  </template>
 

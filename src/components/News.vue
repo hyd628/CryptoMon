@@ -1,20 +1,40 @@
 <template>
   <div>
-      <h1>Welcome {{ this.$store.state.pseudo }}.</h1>
-          Welcome {{ this.$store.state.pseudo }}. Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
-            <router-link to="/home">Home</router-link>
+      <h1>News</h1>
+      <ul>
+        <li v-for="(item, index) in newsData" :key="index">
+            <news-item :title="item.title" :content="item.content" :date="item.date"></news-item>
+        </li>
+      </ul>
   </div>
  </template>
 
 <script>
   import Users from '@/js/users'
+  import NewsItem from './NewsItem.vue'
+
   export default {
 
     name: 'news',
 
+    components: {
+      NewsItem
+    },
+
     data () {
       return {
-        msg: 'Welcome to CryptoMon World!'
+        newsData: [
+          {
+            title: 'News Item 1',
+            content: 'blah blah blah',
+            date: 'June 11, 2018'
+          },
+          {
+            title: 'News Item 2',
+            content: 'blah blah blah',
+            date: 'June 10, 2018'
+          }
+        ]
       }
     },
 
@@ -36,4 +56,9 @@
 </script>
 
 <style lang="scss" scoped>
+
+  ul {
+    list-style-type: none;
+  }
+  
 </style>
