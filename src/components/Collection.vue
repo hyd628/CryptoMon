@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Manage Cryptomon Collection</h1>
-    <Table highlight-row ref="currentRowTable" :columns="columns3" :data="tableData" @on-current-change="changeHandler($event)"></Table>
+    <Table highlight-row ref="currentRowTable" :height="tableHeight" :columns="columns3" :data="tableData" @on-current-change="changeHandler($event)"></Table>
     <Button type="primary" @click="handleClearCurrentRow">Clear Selection</Button>
     <Button type="primary" @click="viewCurrentRow" :disabled = "mIDDefined">View Details</Button>
     <Modal
@@ -31,6 +31,7 @@
       return {
         monsterid: '',
         modal1: false, 
+        tableHeight: 500,
         columns3: [
                     {
                         type: 'index',
@@ -87,10 +88,13 @@
       MonsterHelper.init()
     },
 
+    mounted: function () {
+      this.tableHeight = window.innerHeight - this.$refs.currentRowTable.$el.offsetTop - 150
+    },
+
     methods: {
 
       changeHandler ($event) {
-        console.log($event)
         if ($event)
         {
           this.monsterid = $event.mid

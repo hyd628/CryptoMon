@@ -1,23 +1,50 @@
 <template>
   <div>
-      <h1>Welcome, {{ this.$store.state.pseudo }}.</h1>
-           Deactivate your account by clicking <a href="#" @click="destroyAccount">here</a>.
-          <router-link to="/news">News</router-link>
-          <router-link to="/spawn">Spawn Cryptomon</router-link>
-
+      <h1>Notifications</h1>
+      <ul id="example-1">
+        <li v-for="(item, index) in notificationData" :key="index">
+            <Icon type="android-notifications-none"></Icon> {{ item.args.name }} created.
+        </li>
+    </ul>
   </div>
  </template>
 
 <script>
   import Users from '@/js/users'
+  import MonsterFactory from '@/js/monsterfactory'
+  import MonsterHelper from '@/js/monsterhelper'
+
   export default {
 
     name: 'notification',
 
     data () {
       return {
-        msg: 'Welcome to CryptoMon World!'
+        notificationData:[]
       }
+    },
+
+    beforeCreate: function () {
+      MonsterHelper.init().then(() => {
+        const event = MonsterHelper.instance.NewMonster({})
+        const pastEvents = MonsterHelper.instance.NewMonster({}, { fromBlock: 0, toBlock: 'latest' })
+        pastEvents.get((err, result) => {
+            var i;
+            for (i = 0; i < result.length - 1; i++) { 
+                this.notificationData.push(result[i])
+            }
+            /*
+          let self = this
+          result.forEach(function(element) {
+                self.notificationData.push(element)
+          })*/
+        })
+        event.watch((err, result) => {
+          this.notificationData.push(result)
+        })
+      }).catch(err => {
+        console.log(err)
+      })
     },
 
     methods: {
@@ -50,5 +77,9 @@
 a {
   color: #42b983;
 } 
+
+ul {
+  list-style-type: none;
+}
 
 </style>

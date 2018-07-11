@@ -72,20 +72,24 @@
             if(this.web3Exists)
             {
               this.$Loading.start();
-              MonsterHelper.createRandomMonster(this.formInline.monster).then(tx => {
-                console.log(tx)
-                this.$Loading.finish();
-                this.$Message.success({
-                    render: h => {
+              MonsterHelper.init().then(() => {
+                MonsterHelper.createRandomMonster(this.formInline.monster).then(tx => {
+                  console.log(tx)
+                  this.$Loading.finish();
+                  this.$Message.success({
+                      render: h => {
                         return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
                             'Spawn successful!'
                         ])
-                    },
-                    duration: 2,
+                      },
+                      duration: 2,
+                  })
+                }).catch(err => {
+                  this.$Loading.error();
+                  this.popFailureMessage()
+                  console.log(err)
                 })
               }).catch(err => {
-                this.$Loading.error();
-                this.popFailureMessage()
                 console.log(err)
               })
             }
