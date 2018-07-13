@@ -1,8 +1,9 @@
 <template>
   <div style="padding: 20px">
-      <Card style="width:350px">
+      <Card style="width:80%; margin: auto">
         <p slot="title">
             {{ title }}
+            {{ date }}
         </p>
         {{ content }}
     </Card>

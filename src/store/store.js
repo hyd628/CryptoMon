@@ -9,6 +9,19 @@ export default new Vuex.Store({
     layoutview: 'Home'
   },
 
+  newsData: [
+    {
+      title: 'News Item 1',
+      content: 'blah blah blah',
+      date: 'June 11, 2018'
+    },
+    {
+      title: 'News Item 2',
+      content: 'blah blah blah',
+      date: 'June 10, 2018'
+    }
+  ],
+
   mutations: {
     
     register (state, _pseudo) 

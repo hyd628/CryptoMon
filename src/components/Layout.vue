@@ -34,7 +34,8 @@
                 </Menu>
             </Header>
             <Layout>
-                <Sider width='200' :style="{background: '#495060'}">
+                <Sider width='200' :style="{background: '#495060'}" collapsible :collapsed-width="30" v-model="isCollapsed">
+                    <div v-if="!isCollapsed">
                     <Menu theme="dark" width="auto" :active-name="layoutview" :open-names="sidebarmenu" accordion ref="side_menu">
                         <Submenu name="CryptomonMenu">
                             <template slot="title">
@@ -70,6 +71,7 @@
                             <menu-item name="4-2">Option 2</menu-item>
                         </Submenu>
                     </Menu>
+                    </div>
                 </Sider>
                 <Layout :style="{padding: '0 24px 0px'}" class="layout">
                     <Breadcrumb :style="{margin: '8px 0'}">
@@ -95,11 +97,20 @@
 
         name: 'layout',
 
+        data () {
+            return {
+                isCollapsed: false
+            };
+        },
+
         beforeUpdate: function()
         {
-            this.$nextTick(() => {
-                    this.$refs.side_menu.updateOpened()
-                })
+            if(!this.isCollapsed)
+            {
+                this.$nextTick(() => {
+                        this.$refs.side_menu.updateOpened()
+                    })
+            }
         },
 
         computed: {
@@ -114,7 +125,7 @@
                 } else {
                     return []
                 }
-            }
+            },
 
         }
 
