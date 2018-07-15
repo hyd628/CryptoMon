@@ -26,20 +26,8 @@
 
     beforeCreate: function () {
       MonsterHelper.init().then(() => {
-        const event = MonsterHelper.instance.NewMonster({})
-        const pastEvents = MonsterHelper.instance.NewMonster({}, { fromBlock: 0, toBlock: 'latest' })
-        pastEvents.get((err, result) => {
-            var i;
-            for (i = 0; i < result.length; i++) { 
-                this.notificationData.push(result[i])
-            }
-            /*
-          let self = this
-          result.forEach(function(element) {
-                self.notificationData.push(element)
-          })*/
-        })
-        event.watch((err, result) => {
+        const events = MonsterHelper.instance.NewMonster({}, { fromBlock: 0, toBlock: 'latest' })
+        events.watch((err, result) => {
           console.log(result)
           this.notificationData.push(result)
         })
