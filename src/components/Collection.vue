@@ -20,7 +20,6 @@
 
 <script>
  
-  import MonsterFactory from '@/js/monsterfactory'
   import MonsterHelper from '@/js/monsterhelper'
 
   export default {

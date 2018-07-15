@@ -3,7 +3,7 @@
       <h1>Notifications</h1>
       <ul>
         <li v-for="(item, index) in notificationData" :key="index">
-            <Icon type="android-notifications-none"></Icon> {{ item.args.name }} created.
+            <Icon type="android-notifications-none"></Icon> {{ item.args.name }} created by {{item.args.owner.substring(0,8)+'**'}}.
         </li>
       </ul>
   </div>
@@ -30,7 +30,7 @@
         const pastEvents = MonsterHelper.instance.NewMonster({}, { fromBlock: 0, toBlock: 'latest' })
         pastEvents.get((err, result) => {
             var i;
-            for (i = 0; i < result.length - 1; i++) { 
+            for (i = 0; i < result.length; i++) { 
                 this.notificationData.push(result[i])
             }
             /*
@@ -40,6 +40,7 @@
           })*/
         })
         event.watch((err, result) => {
+          console.log(result)
           this.notificationData.push(result)
         })
       }).catch(err => {

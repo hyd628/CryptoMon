@@ -1,11 +1,11 @@
 <template>
   <div style="padding: 20px">
-      <Card style="width:80%; margin: auto">
+      <Card style="width:80%; margin: auto;">
         <p slot="title">
             {{ title }}
-            {{ date }}
         </p>
-        {{ content }}
+        <p><small><b>{{ date }}</b></small></p>
+        <p>{{ content }}</p>
     </Card>
   </div>
  </template>

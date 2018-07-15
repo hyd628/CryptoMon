@@ -4,7 +4,7 @@ import "./ownable.sol";
 
 contract MonsterFactory is Ownable {
 
-    event NewMonster(uint MonsterId, string name, uint dna);
+    event NewMonster(uint MonsterId, string name, uint dna, address owner);
 
     uint dnaDigits = 16;
     uint dnaModulus = 10 ** dnaDigits;
@@ -29,7 +29,7 @@ contract MonsterFactory is Ownable {
         uint id = monsters.push(Monster(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
         monsterToOwner[id] = msg.sender;
         ownerMonsterCount[msg.sender]++;
-        emit NewMonster(id, _name, _dna);
+        emit NewMonster(id, _name, _dna, msg.sender);
     }
 
     function _generateRandomDna(string _str) private view returns (uint) {

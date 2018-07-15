@@ -1,7 +1,7 @@
 <template>
   <section id='welcome'>
     <div>
-      <img src="../assets/logo.png">
+      <img src="../assets/newlogo.svg">
       <h1>{{ msg }}</h1>
       <h2>Sign up <router-link to="/signup">here</router-link></h2>
       <h2>Browse as a <router-link to="/home" v-on:click.native="guestSignIn" >guest</router-link></h2>

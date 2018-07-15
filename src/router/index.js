@@ -10,6 +10,7 @@ import Account from '@/components/Account'
 import Spawn from '@/components/Spawn'
 import Collection from '@/components/Collection'
 import Notification from '@/components/Notification'
+import Transfer from '@/components/Transfer'
 import store from '../store/store.js'
 
 
@@ -66,6 +67,11 @@ const router = new Router({
               path: '/notification',
               name: 'Notification',
               component: Notification
+            },
+            {
+              path: '/transfer',
+              name: 'Transfer',
+              component: Transfer
             }
           ]
         }

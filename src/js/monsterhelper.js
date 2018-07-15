@@ -51,6 +51,19 @@ const MonsterHelper = {
     })
   },
 
+  transferMonster: function (mID, newowner){
+    let self = this
+    return new Promise((resolve, reject) => {
+      self.instance.transferMonster(mID, newowner,
+        {from: window.web3.eth.accounts[0]}
+      ).then(tx => {
+        resolve(tx)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
   Monsters: function (id) {
     let self = this
     return new Promise((resolve, reject) => {

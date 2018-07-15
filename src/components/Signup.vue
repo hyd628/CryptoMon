@@ -1,7 +1,7 @@
 <template>
   <section id='signup'>
     <div>
-      <img src="../assets/logo.png">
+      <img src="../assets/newlogo.svg">
       <h1>Sign up for CryptoMon World!</h1>
       <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
         <FormItem prop="user">

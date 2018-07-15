@@ -4,7 +4,7 @@
         <Layout id="layoutinner">
             <Header>
                 <Menu mode="horizontal" theme="dark" :active-name="layoutview">
-                    <div class="layout-logo"><router-link to="/home"><img src="../assets/logo.png"></router-link></div>
+                    <div class="layout-logo"><router-link to="/home"><img src="../assets/newlogo.svg"></router-link></div>
                     <div class="layout-nav">
                         <router-link to="/home">
                             <menu-item name="Home">
@@ -44,7 +44,7 @@
                             </template>
                             <router-link to="/spawn"><menu-item name="Spawn">Spawn Cryptomon</menu-item></router-link>
                             <router-link to="/collection"><menu-item name="Collection">View Collection</menu-item></router-link>
-                            <menu-item name="1-3">Option 3</menu-item>
+                            <router-link to="/transfer"><menu-item name="Transfer">Transfer</menu-item></router-link>
                         </Submenu>
                         <Submenu name="ArenaMenu">
                             <template slot="title">
@@ -78,7 +78,7 @@
                         <BreadcrumbItem to="Home">Dashboard</BreadcrumbItem>
                         <BreadcrumbItem :to="layoutview">{{layoutview}}</BreadcrumbItem>
                     </Breadcrumb>
-                    <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+                    <Content id="content">
                         <router-view></router-view>                        
                     </Content>
                     <Footer id="footer">
@@ -120,7 +120,7 @@
             },
 
             sidebarmenu: function () {
-                if (this.$store.state.layoutview === 'Spawn' || this.$store.state.layoutview === 'Collection') {
+                if (this.$store.state.layoutview === 'Spawn' || this.$store.state.layoutview === 'Collection' || this.$store.state.layoutview === 'Transfer') {
                     return ['CryptomonMenu']
                 } else {
                     return []
@@ -140,6 +140,7 @@
     font-family: 'Monda', sans-serif;
     border: 1px solid #d7dde4;
     background: #f5f7f9;
+    //background: url("../assets/paws.jpg");
     position: relative;
     border-radius: 4px;
     overflow: hidden;
@@ -150,7 +151,14 @@
     width: 100%; 
     height: 100%; 
     position: fixed;
+    //background: #f5f7f9;
     
+}
+
+#content{
+    padding: '24px';
+    min-Height: '280px'; 
+
 }
 
 #footer{

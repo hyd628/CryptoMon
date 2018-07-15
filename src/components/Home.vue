@@ -82,6 +82,7 @@
 #home{
 
   font-family: 'Monda', sans-serif;
+  background: #f5f7f9;
 
 }
 
