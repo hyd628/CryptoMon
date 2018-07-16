@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 20px">
-      <Card style="width:80%; margin: auto;">
+      <Card style="width:80%;">
         <p slot="title">
             {{ title }}
         </p>

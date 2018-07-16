@@ -4,7 +4,7 @@ import "./MonsterFactory.sol";
 
 contract MonsterHelper is MonsterFactory{
 
-    event MonsterTransferred(uint MonsterId, address oldOwner, address newOwner);
+    event MonsterTransferred(uint MonsterId, address oldOwner, address newOwner, string name);
 
     function getZombiesByOwner(address _owner) external view returns(uint[]) {
         uint[] memory result = new uint[](ownerMonsterCount[_owner]);
@@ -27,6 +27,6 @@ contract MonsterHelper is MonsterFactory{
         monsterToOwner[mID] = newOwner;
         ownerMonsterCount[msg.sender]--;
         ownerMonsterCount[newOwner]++;
-        emit MonsterTransferred(mID, msg.sender, newOwner);
+        emit MonsterTransferred(mID, msg.sender, newOwner, monsters[mID].name);
     }
 }
