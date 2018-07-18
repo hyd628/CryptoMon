@@ -11,6 +11,7 @@ import Spawn from '@/components/Spawn'
 import Collection from '@/components/Collection'
 import Notification from '@/components/Notification'
 import Transfer from '@/components/Transfer'
+import PracticeBattle from '@/components/PracticeBattle'
 import store from '../store/store.js'
 
 
@@ -72,7 +73,12 @@ const router = new Router({
               path: '/transfer',
               name: 'Transfer',
               component: Transfer
-            }
+            },
+            {
+              path: '/practicebattle',
+              name: 'PracticeBattle',
+              component: PracticeBattle
+            },
           ]
         }
       ]

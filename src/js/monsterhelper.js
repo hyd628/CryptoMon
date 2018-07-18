@@ -21,14 +21,10 @@ const MonsterHelper = {
     })
   },
     
-  getZombiesByOwner: function (address) {
+  getMonstersByOwner: function (address) {
     let self = this
-    /*
-    return self.instance.getZombiesByOwner(address,
-        {from: window.web3.eth.accounts[0]})*/
-    
     return new Promise((resolve, reject) => {
-      self.instance.getZombiesByOwner(address,
+      self.instance.getMonstersByOwner(address,
         {from: window.web3.eth.accounts[0]}
       ).then(tx => {
         resolve(tx)

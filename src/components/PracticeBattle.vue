@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h1>Transfer Cryptomon</h1>
+    <h1>Practice Battles</h1>
     <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-        <FormItem prop="monster">
-            <Select v-model="formInline.monster" style="width:200px">
+        <FormItem prop="monster1">
+            <Select v-model="formInline.monster1" style="width:250px" placeholder="Participant One">
                 <Option v-for="item in monsterList" :value="item.mid" :key="item.mid">{{ item.label }}</Option>
             </Select>
         </FormItem>
-        <FormItem prop="recipient">
-            <i-input type="text" v-model="formInline.recipient" placeholder="Recipient">
-                <Icon type="arrow-right-c" slot="prepend"></Icon>
-            </i-input>
+        <FormItem prop="monster2">
+             <Select v-model="formInline.monster2" style="width:250px" placeholder="Participant Two">
+                <Option v-for="item in monsterList" :value="item.mid" :key="item.mid">{{ item.label }}</Option>
+            </Select>
         </FormItem>
         <FormItem>
-          <Button type="primary" @click="handleSubmit('formInline')">Transfer</Button>
+          <Button type="primary" @click="handleSubmit('formInline')">Begin Combat</Button>
         </FormItem>
       </Form>
   </div>
@@ -23,46 +23,55 @@
 
     import MonsterHelper from '@/js/monsterhelper'
 
-    const validateMonster = (rule, value, callback) => {
-                if (value) {
-                    callback()
-                }
-                else {
-                    callback(new Error('Please select a Cryptomon to transfer.'))
-                }
-    }
 
-    const validateAddress = (rule, value, callback) => {
-                console.log('address validator called')
-                if (!window.web3.isAddress(value)) {
-                    callback(new Error('Not a valid Ethereum address.'))
-                }
-                else {
-                    callback();
-                }
-    }
 
     export default {
 
-    name: 'transfer',
+    name: 'practicebattle',
+
+    
 
     data () {
 
+    const validateMonster1 = (rule, value, callback) => {
+                //console.log('address validator called')
+                if (!value) {
+                    callback(new Error('Choose a valid Cryptomon'))
+                }
+                if (value === this.formInline.monster2) {
+                    callback(new Error('Cannot choose the same Cryptomon.'))
+                }
+                else {
+                    callback()
+                }
+    }
+
+    const validateMonster2 = (rule, value, callback) => {
+                if (!value) {
+                    callback(new Error('Choose a valid Cryptomon'))
+                }
+                if (value === this.formInline.monster1) {
+                    callback(new Error('Cannot choose the same Cryptomon.'))
+                }
+                else {
+                    callback()
+                }
+    }
+
 
       return {
-          model1: '',
           monsterList: this.generateTableData(),
           formInline: {
-           monster: '',
-           recipient: ''
+           monster1: '',
+           monster2: ''
           },
           ruleInline: {
-              monster: [
-              { validator: validateMonster, trigger: 'blur' }
+              monster1: [
+              { validator: validateMonster1, trigger: 'change' }
             ],
-              recipient: [
-                  { validator: validateAddress, trigger: 'blur' }
-              ]
+              monster2: [
+            { validator: validateMonster2, trigger: 'change' }
+            ]
 
            } 
       }

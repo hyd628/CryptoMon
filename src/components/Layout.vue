@@ -51,8 +51,8 @@
                                 <Icon type="ios-paw"></Icon>
                                 Battle Arena
                             </template>
-                            <menu-item name="2-1">Option 1</menu-item>
-                            <menu-item name="2-2">Option 2</menu-item>
+                            <router-link to="/practicebattle"><menu-item name="PracticeBattle">Practice Battle</menu-item></router-link>
+                            <menu-item name="2-2">Challenge Arena</menu-item>
                         </Submenu>
                         <Submenu name="FortressMenu">
                             <template slot="title">
@@ -120,9 +120,15 @@
             },
 
             sidebarmenu: function () {
-                if (this.$store.state.layoutview === 'Spawn' || this.$store.state.layoutview === 'Collection' || this.$store.state.layoutview === 'Transfer') {
+                if (this.$store.state.layoutview === 'Spawn' || this.$store.state.layoutview === 'Collection' || this.$store.state.layoutview === 'Transfer') 
+                {
                     return ['CryptomonMenu']
-                } else {
+                } 
+                else if (this.$store.state.layoutview === 'PracticeBattle')
+                {
+                    return ['ArenaMenu']
+                }
+                else {
                     return []
                 }
             },

@@ -33,7 +33,7 @@
       MonsterHelper.init().then(() => {
         const events = MonsterHelper.instance.allEvents({ fromBlock: 0, toBlock: 'latest' })
         events.watch((err, result) => {
-          console.log(result)
+          //console.log(result)
           this.notificationData.push(result)
         })
       }).catch(err => {

@@ -124,10 +124,10 @@
 
       },
 
-      getZombieByOwner: function () {
+      getMonstersByOwner: function () {
         return new Promise((resolve, reject) => {
           MonsterHelper.init().then(() => {
-            MonsterHelper.getZombiesByOwner(window.web3.eth.accounts[0]).then(mons => {
+            MonsterHelper.getMonstersByOwner(window.web3.eth.accounts[0]).then(mons => {
  	            resolve(mons)
  	          }).catch(err => {
   	          reject(err)
@@ -152,7 +152,7 @@
 
      generateTableData: function(){
        let data = [];
-       this.getZombieByOwner().then(mons => { 
+       this.getMonstersByOwner().then(mons => { 
         mons.forEach(function(element) {
           MonsterHelper.Monsters(element).then(mon => {
              data.push({'name': mon[0], 'level': mon[2], 'wins': mon[4], 'losses': mon[5], 'mid': element})
