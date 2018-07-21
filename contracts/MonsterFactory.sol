@@ -13,7 +13,7 @@ contract MonsterFactory is Ownable {
     struct Monster {
         string name;
         uint dna;
-        uint32 level;
+        uint32 experience;
         uint32 readyTime;
         uint16 winCount;
         uint16 lossCount;
@@ -26,7 +26,7 @@ contract MonsterFactory is Ownable {
 
     function _createMonster(string _name, uint _dna) internal {
         /* solium-disable-next-line */
-        uint id = monsters.push(Monster(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+        uint id = monsters.push(Monster(_name, _dna, 0, uint32(now + cooldownTime), 0, 0)) - 1;
         monsterToOwner[id] = msg.sender;
         ownerMonsterCount[msg.sender]++;
         emit NewMonster(id, _name, _dna, msg.sender);

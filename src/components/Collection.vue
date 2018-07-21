@@ -7,8 +7,12 @@
     <Modal
         v-model="modal1"
         :title=monsterDetails.name id="monsterstats">
+        <p>Experience: {{monsterDetails.experience}}</p>
         <p>Level: {{monsterDetails.level}}</p>
         <p>DNA: {{monsterDetails.DNA}}</p>
+        <p>HP: {{monsterDetails.hp}}</p>
+        <p>Attack: {{monsterDetails.attack}}</p>
+        <p>Defense: {{monsterDetails.defense}}</p>
         <p>Wins: {{monsterDetails.wins}}</p>
         <p>Losses: {{monsterDetails.losses}}</p>
         <p>Ready Time: {{monsterDetails.readytime}}</p>
@@ -21,6 +25,7 @@
 <script>
  
   import MonsterHelper from '@/js/monsterhelper'
+  import BattleHelper from '@/js/battlehelper'
 
   export default {
 
@@ -66,7 +71,11 @@
                   DNA: '',
                   wins: '',
                   losses: '',
+                  experience: '',
                   level: '',
+                  hp: '',
+                  attack: '',
+                  defense: '',
                   readytime: ''
                 },
       }
@@ -110,17 +119,24 @@
 
       viewCurrentRow () {
         console.log(this.monsterid)
-        this.modal1 = true
+
         MonsterHelper.Monsters(this.monsterid).then(mon => {
+            var detailedMon = BattleHelper.getDerivedStats({'name': mon[0], 'experience': mon[2], 'dna': mon[1], 'mid': this.monsterid})
             this.monsterDetails.name = mon[0]
-            this.monsterDetails.level = mon[2]
+            this.monsterDetails.experience = mon[2]
             this.monsterDetails.wins = mon[4]
             this.monsterDetails.losses = mon[5]
             this.monsterDetails.DNA = mon[1]
             this.monsterDetails.readytime = mon[3]
+            this.monsterDetails.level = detailedMon.level
+            this.monsterDetails.hp = detailedMon.hp
+            this.monsterDetails.attack = detailedMon.attack
+            this.monsterDetails.defense = detailedMon.defense
+
  	        }).catch(err => {
   	        console.log(err)
           })
+        this.modal1 = true
 
       },
 
@@ -155,7 +171,8 @@
        this.getMonstersByOwner().then(mons => { 
         mons.forEach(function(element) {
           MonsterHelper.Monsters(element).then(mon => {
-             data.push({'name': mon[0], 'level': mon[2], 'wins': mon[4], 'losses': mon[5], 'mid': element})
+             data.push({'name': mon[0], 'experience': mon[2], 'wins': mon[4], 'losses': mon[5], 'mid': element, 'level': BattleHelper.getLevelFromExp(mon[2])})
+             console.log(BattleHelper.getDerivedStats({'name': mon[0], 'experience': mon[2], 'dna': mon[1], 'mid': element}))
  	        }).catch(err => {
   	        console.log(err)
           })

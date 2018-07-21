@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Practice Battles</h1>
-    <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+    <Row><h1>Practice Battles</h1></Row>
+
+    <Row><Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
         <FormItem prop="monster1">
             <Select v-model="formInline.monster1" style="width:250px" placeholder="Participant One">
                 <Option v-for="item in monsterList" :value="item.mid" :key="item.mid">{{ item.label }}</Option>
@@ -16,12 +17,17 @@
           <Button type="primary" @click="handleSubmit('formInline')">Begin Combat</Button>
         </FormItem>
       </Form>
+    </Row>
+    <Row>
+        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea"></battle-text>
+    </Row>
   </div>
  </template>
 
 <script>
 
     import MonsterHelper from '@/js/monsterhelper'
+    import BattleText from './BattleText.vue'
 
 
 
@@ -29,7 +35,9 @@
 
     name: 'practicebattle',
 
-    
+    components: {
+      BattleText
+    },
 
     data () {
 
@@ -125,6 +133,8 @@
         handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
+            this.$refs['btextarea'].generateCombatData()
+            /*
             let self = this
             if(this.web3Exists)
             {
@@ -168,11 +178,12 @@
                 closable: true
                 });
             }
+            */
           } else {
             this.$Message.error({
                     render: h => {
                         return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
-                            'Transfer failed!'
+                            'Invalid Request!'
                         ])
                     },
                     duration: 2,
