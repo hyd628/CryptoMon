@@ -1,27 +1,34 @@
 <template>
-  <div>
-      <div ref="restofcontent">
-    <Row><h1>Practice Battles</h1></Row>
-
-    <Row><Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+  <div id="challengearena">
+    <div ref="restofcontent">
+    <Row><h1>Challenge Arena</h1></Row>
+    <Form ref="formInline" :model="formInline" :rules="ruleInline">
         <FormItem prop="monster1">
-            <Select v-model="formInline.monster1" style="width:250px" placeholder="Participant One">
+            <Select v-model="formInline.monster1" style="width:250px; margin-top: 10px" placeholder="Choose Your Cryptomon">
                 <Option v-for="item in monsterList" :value="item.mid" :key="item.mid">{{ item.label }}</Option>
             </Select>
+        </FormItem>
+        <FormItem prop="opponentaddress">
+          <i-input type="text" v-model="formInline.opponentaddress" style="width:250px" placeholder="Opponent Address" @on-blur="handleAddress">
+            <Icon type="ios-person-outline" slot="prepend"></Icon>
+          </i-input>
         </FormItem>
         <FormItem prop="monster2">
-             <Select v-model="formInline.monster2" style="width:250px" placeholder="Participant Two">
-                <Option v-for="item in monsterList" :value="item.mid" :key="item.mid">{{ item.label }}</Option>
+             <Select v-model="formInline.monster2" style="width:250px" placeholder="Choose Opponent Cryptomon">
+                <Option v-for="item in monsterList2" :value="item.mid" :key="item.mid">{{ item.label }}</Option>
             </Select>
         </FormItem>
+        <Row>
         <FormItem>
           <Button type="primary" @click="handleSubmit('formInline')">Begin Combat</Button>
         </FormItem>
+        </Row>
       </Form>
-    </Row>
+
+      <Row style="margin-bottom: 10px">Show combat resolution: <i-switch v-model="switch1" size="small"></i-switch></Row>
     </div>
     <Row>
-        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea"></battle-text>
+        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea" v-show="switch1"></battle-text>
     </Row>
   </div>
  </template>
@@ -35,7 +42,7 @@
 
     export default {
 
-    name: 'practicebattle',
+    name: 'challengearena',
 
     components: {
       BattleText
@@ -68,20 +75,42 @@
                 }
     }
 
+    const validateAddress = (rule, value, callback) => {
+                //console.log('address validator called')
+                if (!window.web3.isAddress(value)) {
+                    callback(new Error('Not a valid Ethereum address.'))
+                }
+                else {
+                    callback();
+                }
+    }
+
 
       return {
-          monsterList: this.generateTableData(),
+
+        monsterList: this.generateTableData(),
+
+                      
+        monsterList2: [],
+
+          switch1: true,
+
           formInline: {
            monster1: '',
-           monster2: ''
+           monster2: '',
+           opponentaddress: ''
           },
+
           ruleInline: {
               monster1: [
               { validator: validateMonster1, trigger: 'change' }
             ],
               monster2: [
             { validator: validateMonster2, trigger: 'change' }
-            ]
+            ],
+             opponentaddress: [
+                  { validator: validateAddress, trigger: 'blur' }
+              ]
 
            }
       }
@@ -98,21 +127,46 @@
 
     },
 
+
     mounted: function()
     {
-        //console.log(window.innerHeight)
-        //console.log(this.$refs.restofcontent.clientHeight)
-        //console.log((window.innerHeight - this.$refs.restofcontent.clientHeight-171).toString()+'px')
+        this.generateListFromAddress()
         this.$refs['btextarea'].listHeight = (window.innerHeight - this.$refs.restofcontent.clientHeight-171).toString()+'px'
-        //this.combatListHeight = (window.innerHeight - this.$refs.restofcontent.clientHeight).toString()+'px'
+
     },
 
     methods: {
+
+        handleAddress: function () {
+            if(window.web3.isAddress(this.formInline.opponentaddress))
+            {
+                this.generateListFromAddress()
+            }
+            else
+            {
+                //console.log('clear selection')
+                this.monsterList2 = []
+            }
+        },
         
         getMonstersByOwner: function () {
             return new Promise((resolve, reject) => {
             MonsterHelper.init().then(() => {
                 MonsterHelper.getMonstersByOwner(window.web3.eth.accounts[0]).then(mons => {
+                    resolve(mons)
+                }).catch(err => {
+                reject(err)
+                })
+            }).catch(err => {
+                reject(err)
+            })
+            })
+        },
+
+        getMonstersByAddress: function (address) {
+            return new Promise((resolve, reject) => {
+            MonsterHelper.init().then(() => {
+                MonsterHelper.getMonstersByOwner(address).then(mons => {
                     resolve(mons)
                 }).catch(err => {
                 reject(err)
@@ -139,6 +193,24 @@
         })
             //console.log(data)
             return data
+        },
+
+        generateListFromAddress: function(){
+            
+            let data = [];
+            this.getMonstersByAddress(this.formInline.opponentaddress).then(mons => { 
+                mons.forEach(function(element) {
+                MonsterHelper.Monsters(element).then(mon => {
+                        //console.log(element)
+                        data.push({'value': mon[0], 'label': mon[0], 'mid': element.toString()})
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+            this.monsterList2 = data
         },
 
         handleSubmit(name) {
@@ -215,5 +287,42 @@
 a {
   color: #42b983;
 } 
+
+#challengearena {
+
+.form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    input[type="text"]
+    {
+      font-family: 'Monda', sans-serif;
+    }
+  
+      
+    .entry {
+      display: flex;
+      flex-direction: row-reverse;
+       justify-content: center;
+      
+      label {
+        margin-right: 20px
+        }
+        
+      button {
+        margin-left: 20px
+      }  
+       
+    }
+
+    .select{
+        margin-top: 20px
+    }
+        
+  }
+
+}
 
 </style>

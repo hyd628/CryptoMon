@@ -41,12 +41,8 @@
     data () {
       return {
           combatData:[],
-          listHeight: '100px'
+          listHeight: ''
       }
-    },
-
-    mounted: function () {
-      this.listHeight = (window.innerHeight - 300).toString()+'px'
     },
 
     methods: {

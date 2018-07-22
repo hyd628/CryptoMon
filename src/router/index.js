@@ -12,6 +12,7 @@ import Collection from '@/components/Collection'
 import Notification from '@/components/Notification'
 import Transfer from '@/components/Transfer'
 import PracticeBattle from '@/components/PracticeBattle'
+import ChallengeArena from '@/components/ChallengeArena'
 import store from '../store/store.js'
 
 
@@ -76,8 +77,13 @@ const router = new Router({
             },
             {
               path: '/practicebattle',
-              name: 'PracticeBattle',
+              name: 'Practice Battle',
               component: PracticeBattle
+            },
+            {
+              path: '/challengearena',
+              name: 'Challenge Arena',
+              component: ChallengeArena
             },
           ]
         }

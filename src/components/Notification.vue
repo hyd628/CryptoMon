@@ -4,10 +4,10 @@
       <ul>
         <li v-for="(item, index) in notificationData" :key="index">
             <div v-if="item.event === 'NewMonster'">
-              <Icon type="android-notifications-none"></Icon> {{ item.args.name }} created by {{item.args.owner.substring(0,8)+'**'}}.
+              <Icon type="android-notifications-none"></Icon> {{ item.args.name }} created by {{item.args.owner}}.
             </div>
             <div v-if="item.event === 'MonsterTransferred'">
-              <Icon type="android-notifications-none"></Icon> {{ item.args.name }} transferred from {{item.args.oldOwner.substring(0,8)+'**'}} to {{item.args.newOwner.substring(0,8)+'**'}}.
+              <Icon type="android-notifications-none"></Icon> {{ item.args.name }} transferred from {{item.args.oldOwner}} to {{item.args.newOwner}}.
             </div>
         </li>
       </ul>

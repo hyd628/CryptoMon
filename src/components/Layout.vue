@@ -51,8 +51,8 @@
                                 <Icon type="ios-paw"></Icon>
                                 Battle Arena
                             </template>
-                            <router-link to="/practicebattle"><menu-item name="PracticeBattle">Practice Battle</menu-item></router-link>
-                            <menu-item name="2-2">Challenge Arena</menu-item>
+                            <router-link to="/practicebattle"><menu-item name="Practice Battle">Practice Battle</menu-item></router-link>
+                            <router-link to="/challengearena"><menu-item name="Challenge Arena">Challenge Arena</menu-item></router-link>
                         </Submenu>
                         <Submenu name="FortressMenu">
                             <template slot="title">
@@ -124,7 +124,7 @@
                 {
                     return ['CryptomonMenu']
                 } 
-                else if (this.$store.state.layoutview === 'PracticeBattle')
+                else if (this.$store.state.layoutview === 'Practice Battle' || this.$store.state.layoutview === 'Challenge Arena')
                 {
                     return ['ArenaMenu']
                 }
