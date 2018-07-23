@@ -226,6 +226,7 @@
                                                         'name2': detailedMon1.name,
                                                                 'action': 'result'
                                                                })
+                                this.$emit('result', [detailedMon2.mid, detailedMon2.name, detailedMon1.mid, detailedMon1.name])
 
                             }
                             else{
@@ -233,6 +234,7 @@
                                                         'name2': detailedMon2.name,
                                                                 'action': 'result'
                                                                })
+                                this.$emit('result', [detailedMon1.mid, detailedMon1.name, detailedMon2.mid, detailedMon2.name])
                             }
                         }).catch(err => {
                             console.log(err)

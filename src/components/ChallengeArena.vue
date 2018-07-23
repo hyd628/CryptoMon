@@ -28,7 +28,7 @@
       <Row style="margin-bottom: 10px">Show combat resolution: <i-switch v-model="switch1" size="small"></i-switch></Row>
     </div>
     <Row>
-        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea" v-show="switch1"></battle-text>
+        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea" v-show="switch1" v-on:result="handleResultEvent"></battle-text>
     </Row>
   </div>
  </template>
@@ -136,6 +136,55 @@
     },
 
     methods: {
+
+        handleResultEvent: function(result){
+
+            //console.log(result)
+            //console.log(this.formInline.monster1)
+            if(result[0] === this.formInline.monster1){
+                this.$Message.success({
+                    render: h => {
+                        return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
+                            result[1]+' won against '+result[3]+'!'
+                        ])
+                    },
+                    duration: 5,
+                })
+                MonsterHelper.init().then(() => {
+                    MonsterHelper.reportBattleResult(parseInt(result[0]), parseInt(result[2])).then(
+                        tx => { console.log(tx)
+                    }
+                    ).catch(err => {
+                        reject(err)
+                    })
+                }).catch(err => {
+                    reject(err)
+                })
+            }
+            else{
+                this.$Message.warning({
+                    render: h => {
+                        return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
+                            result[3]+' lost against '+result[1]+'!'
+                        ])
+                    },
+                    duration: 5,
+                })
+                MonsterHelper.init().then(() => {
+                    MonsterHelper.reportBattleResult(parseInt(result[0]), parseInt(result[2])).then(
+                        tx => { console.log(tx)
+                    }
+                    )
+                    .catch(err => {
+                        reject(err)
+                    })
+                }).catch(err => {
+                    reject(err)
+                })
+            }
+
+
+        },
 
         handleAddress: function () {
             if(window.web3.isAddress(this.formInline.opponentaddress))

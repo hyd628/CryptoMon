@@ -60,6 +60,20 @@ const MonsterHelper = {
     })
   },
 
+  reportBattleResult: function (mID1, mID2){
+    let self = this
+    return new Promise((resolve, reject) => {
+      self.instance.reportBattleResult(mID1, mID2,
+        {from: window.web3.eth.accounts[0]}
+      ).then(tx => {
+        //console.log(tx)
+        resolve(tx)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
   Monsters: function (id) {
     let self = this
     return new Promise((resolve, reject) => {

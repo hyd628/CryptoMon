@@ -21,7 +21,7 @@
     </Row>
     </div>
     <Row>
-        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea"></battle-text>
+        <battle-text :mID1="formInline.monster1" :mID2="formInline.monster2" ref="btextarea" v-on:result="handleResultEvent"></battle-text>
     </Row>
   </div>
  </template>
@@ -108,6 +108,11 @@
     },
 
     methods: {
+
+        handleResultEvent: function($event){
+
+            //console.log($event)
+        },
         
         getMonstersByOwner: function () {
             return new Promise((resolve, reject) => {
