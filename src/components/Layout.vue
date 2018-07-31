@@ -4,7 +4,7 @@
         <Layout id="layoutinner">
             <Header>
                 <Menu mode="horizontal" theme="dark" :active-name="layoutview">
-                    <div class="layout-logo"><router-link to="/home"><img src="../assets/newlogo.svg"></router-link></div>
+                    <div class="layout-logo"><router-link to="/home"><img src="../assets/frontlogo.png"></router-link></div>
                     <div class="layout-nav">
                         <router-link to="/home">
                             <menu-item name="Home">
