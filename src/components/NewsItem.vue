@@ -6,11 +6,15 @@
         </p>
         <p><small><b>{{ date }}</b></small></p>
         <p>{{ content }}</p>
+         <br>
+        <p><img width="100%" :src = layoutview></p>
     </Card>
   </div>
  </template>
 
 <script>
+
+ require("../assets/frontlogo.png")
 
   export default {
 
@@ -20,12 +24,15 @@
         title: String,
         date: String,
         isPublished: Boolean,
-        content: String
+        content: String,
+        imgurl: String
     },
 
-    data () {
-      return {
-      }
+    computed: {
+
+            layoutview: function () {
+                return this.imgurl
+            }
     },
 
     methods: {

@@ -1,6 +1,8 @@
 <template>
   <div>
+      <div v-if=" !hideTitle ">
       <h1>Notifications</h1>
+      </div>
       <ul>
         <li v-for="(item, index) in notificationData" :key="index">
             <div v-if="item.event === 'NewMonster'">
@@ -29,6 +31,10 @@
       }
     },
 
+    props: {
+        hideTitle: Boolean
+    },
+
     beforeCreate: function () {
       MonsterHelper.init().then(() => {
         const events = MonsterHelper.instance.allEvents({ fromBlock: 0, toBlock: 'latest' })
@@ -39,6 +45,13 @@
       }).catch(err => {
         console.log(err)
       })
+      console.log('check prop')
+      console.log(this.showtitle)
+    },
+
+    mounted: function() {
+        console.log('check prop')
+      console.log(this.showtitle)
     },
 
     methods: {

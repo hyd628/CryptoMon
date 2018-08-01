@@ -2,9 +2,9 @@
     <section id='layout'>
     <div class="layout">
         <Layout id="layoutinner">
-            <Header>
+            <Header id = 'layoutheader'>
                 <Menu mode="horizontal" theme="dark" :active-name="layoutview">
-                    <div class="layout-logo"><router-link to="/home"><img src="../assets/frontlogo.png"></router-link></div>
+                    <div class="layout-logo"><router-link to="/home"><img src="../assets/cornerlogo2.png"></router-link></div>
                     <div class="layout-nav">
                         <router-link to="/home">
                             <menu-item name="Home">
@@ -40,7 +40,7 @@
                         <Submenu name="CryptomonMenu">
                             <template slot="title">
                                 <Icon type="social-octocat"></Icon>
-                                Cryptomons
+                                Cryptomon
                             </template>
                             <router-link to="/spawn"><menu-item name="Spawn">Spawn Cryptomon</menu-item></router-link>
                             <router-link to="/collection"><menu-item name="Collection">View Collection</menu-item></router-link>
@@ -161,6 +161,11 @@
     
 }
 
+
+#layoutheader{
+    padding: 0px;
+}
+
 #content{
     padding: '24px';
     min-Height: '280px'; 
@@ -178,14 +183,15 @@
 }
 
 .layout-logo{
-    width: 50px;
-    height: 50px;
+    width: 140px;
+    height: 80px;
     /*background: #5b6270;*/
     border-radius: 3px;
     float: left;
     position: relative;
     top: 10px;
-    /*left: 10px;*/
+    left: 18px;
+    right: 10px;
     bottom: 10px;
 }
 .layout-nav{

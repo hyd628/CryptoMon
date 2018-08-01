@@ -1,9 +1,10 @@
 <template>
   <section id='welcome'>
     <div>
-      <img width="200" src="../assets/frontlogo.png">
+      <img width="100" src="../assets/frontlogo.png">
       <h1>{{ msg }}</h1>
-      <h2>Sign up <router-link to="/signup">here</router-link></h2>
+      <h2>Sign up <router-link to="/signup">here</router-link> </h2> 
+      <sub>(Requires Metamask and Ropsten Ether account) </sub> 
       <h2>Browse as a <router-link to="/home" v-on:click.native="guestSignIn" >guest</router-link></h2>
       <footer>
         <span>Address Zero Studios &copy; 2018, All Rights Reserved.</span>
@@ -53,7 +54,7 @@
 h1, h2, h3 {
   font-weight: normal;
   display: block;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 a {

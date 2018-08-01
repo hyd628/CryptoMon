@@ -1,9 +1,6 @@
 <template>
   <div id="account">
     <h1>Account Management</h1>
-    <Row>
-        <Button type="primary" @click="destroyAccount" style=" margin-top: 10px; margin-bottom: 10px">Deactivate Account</Button>
-    </Row>
      <Row>
         <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
         <FormItem prop="user" style="margin-top: 20px">
@@ -17,6 +14,7 @@
       </Form>
     </Row>
      <Row>
+        <Button type="primary" @click="destroyAccount" style=" margin-top: 10px; margin-bottom: 10px">Deactivate Account</Button>
         <Button type="primary" @click="switchAccount" style="margin-top: 10px; margin-bottom: 10px">Switch Account</Button>
     </Row>
   </div>
@@ -193,6 +191,10 @@
     display: block;
     margin-bottom: 10px;
     text-align: left;
+  }
+
+  button {
+    margin-right: 19px;
   }
 }
 
