@@ -58,7 +58,7 @@ const Users = {
     return new Promise((resolve, reject) => {
       self.instance.create(
         pseudo,
-        {from: window.web3.eth.accounts[0]}
+        {from: window.web3.eth.accounts[0], gas: 1000000, gasPrice: window.web3.toWei(10, 'gwei')}
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
@@ -72,7 +72,7 @@ const Users = {
 
     return new Promise((resolve, reject) => {
       self.instance.destroy(
-	{from: window.web3.eth.accounts[0], gas: 2000000}
+	    {from: window.web3.eth.accounts[0], gas: 1000000, gasPrice: window.web3.toWei(10, 'gwei')}
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
