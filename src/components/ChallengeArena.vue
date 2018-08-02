@@ -150,11 +150,31 @@
                     },
                     duration: 5,
                 })
+                this.$Loading.start()
                 MonsterHelper.init().then(() => {
                     MonsterHelper.reportBattleResult(parseInt(result[0]), parseInt(result[2])).then(
-                        tx => { console.log(tx)
+                        tx => {
+                            this.$Loading.finish() 
+                            console.log(tx)
+                            this.$Message.success({
+                                render: h => {
+                                return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
+                                    'Battle recorded!'
+                            ])
+                                },
+                                duration: 2,
+                            })
                     }
                     ).catch(err => {
+                        this.$Loading.error();
+                        this.$Message.error({
+                            render: h => {
+                                return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
+                                    'Battle failed to record!'
+                                ])
+                            },
+                            duration: 2,
+                        })
                         reject(err)
                     })
                 }).catch(err => {
@@ -170,15 +190,35 @@
                     },
                     duration: 5,
                 })
+                this.$Loading.start()
                 MonsterHelper.init().then(() => {
                     MonsterHelper.reportBattleResult(parseInt(result[0]), parseInt(result[2])).then(
-                        tx => { console.log(tx)
+                        tx => { 
+                            this.$Loading.finish() 
+                            console.log(tx)
+                            this.$Message.success({
+                                render: h => {
+                                return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
+                                    'Battle recorded!'
+                            ])
+                                },
+                                duration: 2,
+                            })
                     }
                     )
                     .catch(err => {
                         reject(err)
                     })
                 }).catch(err => {
+                    this.$Loading.error();
+                        this.$Message.error({
+                            render: h => {
+                                return h('span', {style: {fontFamily: 'Monda', fontSize: '14px'}}, [
+                                    'Battle failed to record!'
+                                ])
+                            },
+                            duration: 2,
+                        })
                     reject(err)
                 })
             }

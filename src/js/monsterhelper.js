@@ -38,7 +38,7 @@ const MonsterHelper = {
     let self = this
     return new Promise((resolve, reject) => {
       self.instance.createRandomMonster(_name,
-        {from: window.web3.eth.accounts[0]}
+        {from: window.web3.eth.accounts[0], gas: 1000000, gasPrice: window.web3.toWei(10, 'gwei')}
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
@@ -51,7 +51,7 @@ const MonsterHelper = {
     let self = this
     return new Promise((resolve, reject) => {
       self.instance.transfer(newowner, mID,
-        {from: window.web3.eth.accounts[0]}
+        {from: window.web3.eth.accounts[0], gas: 1000000, gasPrice: window.web3.toWei(10, 'gwei')}
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
@@ -64,7 +64,7 @@ const MonsterHelper = {
     let self = this
     return new Promise((resolve, reject) => {
       self.instance.reportBattleResult(mID1, mID2,
-        {from: window.web3.eth.accounts[0]}
+        {from: window.web3.eth.accounts[0], gas: 1000000, gasPrice: window.web3.toWei(10, 'gwei')}
       ).then(tx => {
         //console.log(tx)
         resolve(tx)
