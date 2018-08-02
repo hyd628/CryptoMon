@@ -2,7 +2,7 @@ pragma solidity ^0.4.19;
 
 import "./MonsterFactory.sol";
 
-contract MonsterHelper is MonsterFactory{
+contract MonsterHelper is MonsterFactory {
 
     event MonsterTransferred(uint MonsterId, address oldOwner, address newOwner, string name);
     event BattleResult(uint winnerMID, uint loserMID, string winnerName, string loserName, address winnerOwner, address loserOwner);

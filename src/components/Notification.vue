@@ -11,6 +11,9 @@
             <div v-if="item.event === 'MonsterTransferred'">
               <Icon type="android-notifications-none"></Icon> {{ item.args.name }} transferred from {{item.args.oldOwner}} to {{item.args.newOwner}}.
             </div>
+            <div v-if="item.event === 'BattleResult'">
+              <Icon type="android-notifications-none"></Icon> {{ item.args.winnerOwner }}'s {{ item.args.winnerName}} has defeated {{item.args.loserOwner}}'s {{item.args.loserName}} in combat!
+            </div>
         </li>
       </ul>
   </div>
@@ -18,7 +21,6 @@
 
 <script>
   import Users from '@/js/users'
-  import MonsterFactory from '@/js/monsterfactory'
   import MonsterHelper from '@/js/monsterhelper'
 
   export default {

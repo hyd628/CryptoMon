@@ -1,5 +1,5 @@
 import contract from 'truffle-contract'
-import MonsterHelperContract from '@contracts/MonsterHelper.json'
+import MonsterOwnershipContract from '@contracts/MonsterOwnership.json'
 
 const MonsterHelper = {
     
@@ -10,7 +10,7 @@ const MonsterHelper = {
   init: function () {
     let self = this
     return new Promise(function (resolve, reject) {
-      self.contract = contract(MonsterHelperContract)
+      self.contract = contract(MonsterOwnershipContract)
       self.contract.setProvider(window.web3.currentProvider)
       self.contract.deployed().then(instance => {
         self.instance = instance
@@ -50,7 +50,7 @@ const MonsterHelper = {
   transferMonster: function (mID, newowner){
     let self = this
     return new Promise((resolve, reject) => {
-      self.instance.transferMonster(mID, newowner,
+      self.instance.transfer(newowner, mID,
         {from: window.web3.eth.accounts[0]}
       ).then(tx => {
         resolve(tx)

@@ -44,5 +44,10 @@ contract MonsterFactory is Ownable {
         _createMonster(_name, randDna);
     }
 
+    modifier onlyOwnerOf(uint _monsterId) {
+        require(msg.sender == monsterToOwner[_monsterId]);
+        _;
+    }
+
 }
 
